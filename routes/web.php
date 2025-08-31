@@ -424,17 +424,17 @@ Route::middleware(['auth'])->prefix('finance')->name('finance.')->group(function
     Route::prefix('accounts-receivable')->name('accounts-receivable.')->group(function () {
         Route::get('/', [AccountsReceivableController::class, 'index'])->name('index');
         Route::get('/create-invoice', [AccountsReceivableController::class, 'createInvoice'])->name('create-invoice');
-        Route::get('/customers', [AccountsReceivableController::class, 'customers'])->name('customers');
+        Route::get('/customers', [AccountsReceivableController::class, 'customers'])->name('customers.index');
         Route::get('/customers/create', [AccountsReceivableController::class, 'createCustomer'])->name('customers.create');
         Route::post('/customers', [AccountsReceivableController::class, 'storeCustomer'])->name('customers.store');
         Route::get('/customers/{customer}', [AccountsReceivableController::class, 'showCustomer'])->name('customers.show');
         Route::get('/customers/{customer}/edit', [AccountsReceivableController::class, 'editCustomer'])->name('customers.edit');
         Route::put('/customers/{customer}', [AccountsReceivableController::class, 'updateCustomer'])->name('customers.update');
-        Route::get('/invoices', [AccountsReceivableController::class, 'invoices'])->name('invoices');
+        Route::get('/invoices', [AccountsReceivableController::class, 'invoices'])->name('invoices.index');
         Route::get('/invoices/create', [AccountsReceivableController::class, 'createInvoice'])->name('invoices.create');
         Route::post('/invoices', [AccountsReceivableController::class, 'storeInvoice'])->name('invoices.store');
         Route::get('/payments', [AccountsReceivableController::class, 'payments'])->name('payments');
-        Route::get('/receipts', [AccountsReceivableController::class, 'receipts'])->name('receipts');
+        Route::get('/receipts', [AccountsReceivableController::class, 'receipts'])->name('receipts.index');
         Route::get('/receipts/create', [AccountsReceivableController::class, 'createReceipt'])->name('receipts.create');
         Route::post('/receipts', [AccountsReceivableController::class, 'storeReceipt'])->name('receipts.store');
         Route::get('/receipts/{receipt}', [AccountsReceivableController::class, 'showReceipt'])->name('receipts.show');
