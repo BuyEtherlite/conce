@@ -44,7 +44,7 @@
                             <label class="form-label">&nbsp;</label>
                             <div>
                                 <button type="submit" class="btn btn-primary">Filter</button>
-                                <a href="{{ route('health.facilities') }}" class="btn btn-outline-secondary">Reset</a>
+                                <a href="{{ route('health.facilities.index') }}" class="btn btn-outline-secondary">Reset</a>
                             </div>
                         </div>
                     </form>
