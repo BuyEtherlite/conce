@@ -167,12 +167,12 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3 mb-3">
-                            <a href="{{ route('administration.customers.create') }}" class="btn btn-outline-primary btn-block">
+                            <a href="{{ route('crm.customers.create') }}" class="btn btn-outline-primary btn-block">
                                 <i class="fas fa-user-plus"></i> Add Customer
                             </a>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <a href="{{ route('administration.service-requests.create') }}" class="btn btn-outline-success btn-block">
+                            <a href="{{ route('service-requests.create') }}" class="btn btn-outline-success btn-block">
                                 <i class="fas fa-plus-circle"></i> New Service Request
                             </a>
                         </div>
