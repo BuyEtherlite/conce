@@ -463,7 +463,6 @@ class MulticurrencyController extends Controller
         // Perform currency revaluation
         return [];
     }
-}
 
     public function show($currency)
     {
@@ -489,24 +488,22 @@ class MulticurrencyController extends Controller
 
     public function update(Request $request, $currency)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'code' => 'required|string|max:3',
+            'symbol' => 'required|string|max:10',
+            'exchange_rate' => 'required|numeric|min:0'
+        ]);
+
         try {
             $currency = Currency::findOrFail($currency);
+            $currency->update($validatedData);
             
-            $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'symbol' => 'required|string|max:10',
-                'exchange_rate' => 'required|numeric|min:0',
-            ]);
-
-            $currency->update($validated);
-
             return redirect()->route('finance.multicurrency.index')
                 ->with('success', 'Currency updated successfully.');
         } catch (\Exception $e) {
-            Log::error('Currency update error: ' . $e->getMessage());
             return redirect()->back()
-                ->withInput()
-                ->with('error', 'Failed to update currency: ' . $e->getMessage());
+                ->with('error', 'Failed to update currency.');
         }
     }
 
@@ -515,93 +512,13 @@ class MulticurrencyController extends Controller
         try {
             $currency = Currency::findOrFail($currency);
             $currency->delete();
-
+            
             return redirect()->route('finance.multicurrency.index')
                 ->with('success', 'Currency deleted successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('finance.multicurrency.index')
-                ->with('error', 'Failed to delete currency: ' . $e->getMessage());
-        }
-    }
-
-    public function rates()
-    {
-        try {
-            $currencies = Currency::all();
-            return view('finance.multicurrency.rates', compact('currencies'));
-        } catch (\Exception $e) {
-            return view('finance.multicurrency.rates', ['currencies' => collect()]);
-        }
-    }
-
-    public function storeRate(Request $request)
-    {
-        try {
-            $validated = $request->validate([
-                'currency_id' => 'required|exists:currencies,id',
-                'rate' => 'required|numeric|min:0',
-                'effective_date' => 'required|date',
-            ]);
-
-            // Update the currency exchange rate
-            $currency = Currency::findOrFail($validated['currency_id']);
-            $currency->update([
-                'exchange_rate' => $validated['rate'],
-                'updated_at' => now(),
-            ]);
-
-            return redirect()->route('finance.multicurrency.rates')
-                ->with('success', 'Exchange rate updated successfully.');
-        } catch (\Exception $e) {
             return redirect()->back()
-                ->withInput()
-                ->with('error', 'Failed to update rate: ' . $e->getMessage());
+                ->with('error', 'Failed to delete currency.');
         }
-    }
-
-    public function converter()
-    {
-        try {
-            $currencies = Currency::all();
-            return view('finance.multicurrency.converter', compact('currencies'));
-        } catch (\Exception $e) {
-            return view('finance.multicurrency.converter', ['currencies' => collect()]);
-        }
-    }
-
-    public function convert(Request $request)
-    {
-        try {
-            $validated = $request->validate([
-                'from_currency' => 'required|exists:currencies,id',
-                'to_currency' => 'required|exists:currencies,id',
-                'amount' => 'required|numeric|min:0',
-            ]);
-
-            $fromCurrency = Currency::findOrFail($validated['from_currency']);
-            $toCurrency = Currency::findOrFail($validated['to_currency']);
-
-            // Convert amount using exchange rates
-            $convertedAmount = ($validated['amount'] / $fromCurrency->exchange_rate) * $toCurrency->exchange_rate;
-
-            return response()->json([
-                'success' => true,
-                'converted_amount' => round($convertedAmount, 2),
-                'from' => $fromCurrency->code,
-                'to' => $toCurrency->code,
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'error' => $e->getMessage(),
-            ]);
-        }
-    }
-
-    public function transactions()
-    {
-        // Placeholder for multicurrency transactions
-        return view('finance.multicurrency.transactions', ['transactions' => collect()]);
     }
 
     public function reports()
