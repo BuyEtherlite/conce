@@ -1,0 +1,255 @@
+nternal Server Error
+
+BadMethodCallException
+Method App\Http\Controllers\Committee\CommitteeController::committees does not exist.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+7 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Middleware/AdminMiddleware.php :29
+// Check if user has admin privileges (exclude POS operators from admin access)
+if (!in_array($user->role, ['super_admin', 'admin'])) {
+abort(403, 'Access denied. Administrative privileges required.');
+}
+
+return $next($request);
+}
+}
+
+
+Internal Server Error
+
+Symfony\Component\Routing\Exception\RouteNotFoundException
+Route [committee.members.create] not defined.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+2 vendor frames collapsed
+resources/views/committee/members/index.blade.php
+:9
+require
+13 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+resources/views/committee/members/index.blade.php :9
+
+@section('content')
+<div class="container-fluid">
+<div class="d-flex justify-content-between align-items-center mb-4">
+<h4>👥 Committee Members</h4>
+<a href="{{ route('committee.members.create') }}" class="btn btn-primary">
+<i class="bi bi-plus-lg"></i> Add Member
+</a>
+</div>
+
+
+Internal Server Error
+
+Error
+Class "App\Models\Committee\CommitteeMinute" not found
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+App\Http\Controllers\Committee\CommitteeController
+:251
+minutes
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Committee/CommitteeController.php :251
+
+// Minutes management
+public function minutes()
+{
+// Fetch all minutes, joining with meetings and recorded_by user, ordered by creation date
+$minutes = CommitteeMinute::with(['meeting', 'recordedBy'])
+->orderBy('created_at', 'desc')
+->get();
+
+
+Internal Server Error
+
+Error
+Class "App\Models\Committee\CommitteeAgenda" not found
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+App\Http\Controllers\Committee\CommitteeController
+:353
+agendas
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Committee/CommitteeController.php :353
+
+// Agendas management
+public function agendas()
+{
+// Fetch all agendas, joining with meetings and ordering by meeting date
+$agendas = CommitteeAgenda::with(['meeting.committee'])
+->orderBy('order_index', 'asc')
+->get();
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "committee_resolutions" does not exist LINE 1: ...".*, "committees"."name" as "committee_name" from "committee... ^ (Connection: pgsql, SQL: select "committee_resolutions".*, "committees"."name" as "committee_name" from "committee_resolutions" inner join "committees" on "committee_resolutions"."committee_id" = "committees"."id" order by "resolution_date" desc)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+7 vendor frames collapsed
+App\Http\Controllers\Committee\CommitteeController
+:429
+resolutions
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Committee/CommitteeController.php :429
+{
+$resolutions = DB::table('committee_resolutions')
+->join('committees', 'committee_resolutions.committee_id', '=', 'committees.id')
+->select('committee_resolutions.*', 'committees.name as committee_name')
+->orderBy('resolution_date', 'desc')
+->get();
+
+
+Internal Server Error
+
+BadMethodCallException
+Method App\Http\Controllers\Committee\CommitteeController::publicView does not exist.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+7 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Middleware/AdminMiddleware.php :29
+// Check if user has admin privileges (exclude POS operators from admin access)
+if (!in_array($user->role, ['super_admin', 'admin'])) {
+abort(403, 'Access denied. Administrative privileges required.');
+}
+
+return $next($request);
+}
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "committee_archive" does not exist LINE 1: ...".*, "committees"."name" as "committee_name" from "committee... ^ (Connection: pgsql, SQL: select "committee_archive".*, "committees"."name" as "committee_name" from "committee_archive" inner join "committees" on "committee_archive"."committee_id" = "committees"."id" order by "archive_date" desc)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+7 vendor frames collapsed
+App\Http\Controllers\Committee\CommitteeController
+:530
+archive
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Committee/CommitteeController.php :530
+{
+$archivedItems = DB::table('committee_archive')
+->join('committees', 'committee_archive.committee_id', '=', 'committees.id')
+->select('committee_archive.*', 'committees.name as committee_name')
+->orderBy('archive_date', 'desc')
+->get();
+
+
+Plus all meeting views havee no side nav bar

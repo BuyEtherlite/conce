@@ -1,0 +1,27 @@
+
+  2025_01_26_000001_create_asset_register_table ................ 186.15ms FAIL
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[42P07]: Duplicate table: 7 ERROR:  relation "asset_register" already exists (Connection: pgsql, SQL: create table "asset_register" ("id" bigserial not null primary key, "uuid" varchar(255) not null, "council_id" bigint not null, "department_id" bigint null, "asset_number" varchar(255) not null, "name" varchar(255) not null, "description" text null, "category" varchar(255) not null, "type" varchar(255) not null, "location" varchar(255) not null, "latitude" decimal(10, 8) null, "longitude" decimal(11, 8) null, "acquisition_date" date not null, "acquisition_cost" decimal(15, 2) not null, "current_value" decimal(15, 2) not null, "depreciation_rate" decimal(5, 2) not null default '0', "useful_life_years" integer not null default '1', "condition" varchar(255) not null, "last_inspection_date" date null, "next_inspection_due" date null, "last_maintenance_date" date null, "next_maintenance_due" date null, "warranty_provider" varchar(255) null, "warranty_expiry" date null, "supplier" varchar(255) null, "manufacturer" varchar(255) null, "model" varchar(255) null, "serial_number" varchar(255) null, "status" varchar(255) not null, "disposal_reason" varchar(255) null, "disposal_date" date null, "disposal_value" decimal(15, 2) null, "documents" json null, "photos" json null, "notes" text null, "created_by" bigint not null, "updated_by" bigint null, "created_at" timestamp(0) without time zone null, "updated_at" timestamp(0) without time zone null, "deleted_at" timestamp(0) without time zone null))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      +9 vendor frames 
+
+  10  database/migrations/2025_01_26_000001_create_asset_register_table.php:11
+      Illuminate\Support\Facades\Facade::__callStatic("create")
+      +27 vendor frames 
+
+  38  artisan:11
+      Illuminate\Foundation\Application::handleCommand(Object(Symfony\Component\Console\Input\ArgvInput))
+

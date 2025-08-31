@@ -1,0 +1,153 @@
+Error
+PHP 8.2.23
+11.45.2
+Call to a member function count() on string
+
+Expand vendor frames
+resources
+ / 
+views
+ / 
+council-admin
+ / 
+modules
+ / 
+index.blade
+.php
+ 
+: 77
+require
+13 vendor frames
+App
+ \ 
+Http
+ \ 
+Middleware
+ \ 
+AdminMiddleware
+ 
+: 53
+handle
+42 vendor frames
+public
+ / 
+index
+.php
+ 
+: 51
+require_once
+1 vendor frame
+resources
+ / 
+views
+ / 
+council-admin
+ / 
+modules
+ / 
+index.blade
+.php
+ 
+: 77
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                data-bs-toggle="collapse"
+
+                                                data-bs-target="#features-{{ $module->id }}"
+
+                                                aria-expanded="false">
+
+                                            <i class="fas fa-cog"></i> Features
+
+                                        </button>
+
+                                    </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="card-body">
+
+                                    <p class="text-muted small mb-3">{{ $module->description }}</p>
+
+
+
+                                    <!-- Module Stats -->
+
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                                        <small class="text-muted">Version: {{ $module->version ?? '1.0.0' }}</small>
+
+                                        @if($module->features && $module->features->count() > 0)
+
+                                        <small class="text-muted">
+
+                                            Features: {{ $module->getEnabledFeaturesCount() }}/{{ $module->getTotalFeaturesCount() }} enabled
+
+                                        </small>
+
+                                        @endif
+
+                                    </div>
+
+
+
+                                    <!-- Features Dropdown -->
+
+                                    @if($module->features && $module->features->count() > 0)
+
+                                    <div class="module-features">
+
+                                        <button class="btn btn-outline-primary btn-sm w-100 mb-2"
+
+                                                type="button"
+
+                                                data-bs-toggle="collapse"
+
+                                                data-bs-target="#features_{{ $module->id }}"
+
+                                                aria-expanded="false">
+App
+Routing
+Views
+Request
+Browser
+Headers
+Body
+Context
+User
+Git
+Versions
+App

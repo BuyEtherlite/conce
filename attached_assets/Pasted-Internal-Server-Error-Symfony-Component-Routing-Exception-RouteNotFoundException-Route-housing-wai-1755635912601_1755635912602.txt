@@ -1,0 +1,609 @@
+Internal Server Error
+
+Symfony\Component\Routing\Exception\RouteNotFoundException
+Route [housing.waiting-list] not defined.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+2 vendor frames collapsed
+resources/views/housing/index.blade.php
+:81
+require
+13 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+resources/views/housing/index.blade.php :81
+<div class="mt-2">
+<small>Active entries</small>
+</div>
+</div>
+<div class="card-footer">
+<a href="{{ route('housing.waiting-list') }}" class="text-white text-decoration-none">
+View List <i class="fas fa-arrow-right"></i>
+</a>
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42703]: Undefined column: 7 ERROR: column "is_active" does not exist LINE 1: select * from "departments" where "is_active" = $1 ^ HINT: Perhaps you meant to reference the column "departments.active". (Connection: pgsql, SQL: select * from "departments" where "is_active" = 1)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+9 vendor frames collapsed
+App\Http\Controllers\Housing\PropertyController
+:32
+create
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Housing/PropertyController.php :32
+
+
+}
+
+public function create()
+{
+$councils = Council::where('is_active', true)->get();
+$departments = Department::where('is_active', true)->get();
+$offices = Office::where('is_active', true)->get();
+
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42703]: Undefined column: 7 ERROR: column "approval_date" does not exist LINE 1: select AVG(EXTRACT(DAY FROM (approval_date - application_dat... ^ (Connection: pgsql, SQL: select AVG(EXTRACT(DAY FROM (approval_date - application_date))) as avg_days from "housing_waiting_list" where "status" = approved and "approval_date" is not null limit 1)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+11 vendor frames collapsed
+App\Http\Controllers\Housing\WaitingListController
+:27
+index
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Housing/WaitingListController.php :27
+'total_pending' => WaitingList::where('status', 'pending')->count(),
+'total_approved' => WaitingList::where('status', 'approved')->count(),
+'average_wait_time' => WaitingList::where('status', 'approved')
+->whereNotNull('approval_date')
+->selectRaw('AVG(EXTRACT(DAY FROM (approval_date - application_date))) as avg_days')
+->value('avg_days') ?? 0
+];
+
+Internal Server Error
+
+Symfony\Component\Routing\Exception\RouteNotFoundException
+Route [planning.applications] not defined.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+2 vendor frames collapsed
+resources/views/planning/create-application.blade.php
+:9
+require
+13 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+resources/views/planning/create-application.blade.php :9
+
+
+
+@section('content')
+<div class="container-fluid">
+<div class="d-flex justify-content-between align-items-center mb-4">
+<h4>📄 New Planning Application</h4>
+<a href="{{ route('planning.applications') }}" class="btn btn-secondary">
+<i class="fas fa-arrow-left me-1"></i>Back to Applications
+</a>
+</div>
+
+
+
+
+Internal Server Error
+
+Symfony\Component\Routing\Exception\RouteNotFoundException
+Route [planning.applications] not defined.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+2 vendor frames collapsed
+resources/views/planning/create-application.blade.php
+:9
+require
+13 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+resources/views/planning/create-application.blade.php :9
+
+@section('content')
+<div class="container-fluid">
+<div class="d-flex justify-content-between align-items-center mb-4">
+<h4>📄 New Planning Application</h4>
+<a href="{{ route('planning.applications') }}" class="btn btn-secondary">
+<i class="fas fa-arrow-left me-1"></i>Back to Applications
+</a>
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42703]: Undefined column: 7 ERROR: column "status" does not exist LINE 1: ...*) as aggregate from "water_meter_readings" where "status" =... ^ (Connection: pgsql, SQL: select count(*) as aggregate from "water_meter_readings" where "status" = pending)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+10 vendor frames collapsed
+App\Http\Controllers\Water\WaterController
+:29
+index
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Water/WaterController.php :29
+$recentConnections = WaterConnection::with(['meters'])
+->latest()
+->limit(10)
+->get();
+
+$pendingReadings = WaterMeterReading::where('status', 'pending')->count();
+$qualityTests = WaterQualityTest::whereMonth('test_date', now()->month)->count();
+
+
+Internal Server Error
+
+ParseError
+syntax error, unexpected token "<", expecting end of file
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+App\Models\Utilities\ElectricityConnection
+:52
+Composer\Autoload\{closure}
+1 vendor frame collapsed
+App\Http\Controllers\Utilities\UtilitiesController
+:22
+index
+6 vendor frames collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Models/Utilities/ElectricityConnection.php :52
+public function scopeByType($query, $type)
+{
+return $query->where('connection_type', $type);
+}
+}
+<?php
+
+
+nternal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42703]: Undefined column: 7 ERROR: column engineering_projects.deleted_at does not exist LINE 1: ...m "engineering_projects" where "status" != $1 and "engineeri... ^ (Connection: pgsql, SQL: select count(*) as aggregate from "engineering_projects" where "status" != completed and "engineering_projects"."deleted_at" is null)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+10 vendor frames collapsed
+App\Http\Controllers\Engineering\EngineeringController
+:23
+index
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Engineering/EngineeringController.php :23
+
+
+{
+$user = auth()->user();
+$councils = Council::all();
+
+$stats = [
+'active_projects' => EngineeringProject::where('status', '!=', 'completed')->count(),
+'pending_inspections' => BuildingInspection::where('status', 'scheduled')->count(),
+
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42703]: Undefined column: 7 ERROR: column "category" does not exist LINE 1: select distinct "category" from "inventory_items" where "inv... ^ HINT: Perhaps you meant to reference the column "inventory_items.category_id". (Connection: pgsql, SQL: select distinct "category" from "inventory_items" where "inventory_items"."deleted_at" is null)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+8 vendor frames collapsed
+App\Http\Controllers\Inventory\InventoryController
+:39
+index
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Inventory/InventoryController.php :39
+$query->where('current_stock', 0);
+}
+}
+
+$items = $query->orderBy('name')->paginate(20);
+$categories = Item::select('category')->distinct()->pluck('category')->filter();
+
+$stats = [
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "cemetery_sections" does not exist LINE 1: select * from "cemetery_sections" ^ (Connection: pgsql, SQL: select * from "cemetery_sections")
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+10 vendor frames collapsed
+App\Http\Controllers\Cemeteries\CemeteryController
+:34
+plots
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Cemeteries/CemeteryController.php :34
+
+// Plot Management Methods
+public function plots()
+{
+$plots = CemeteryPlot::with('burialRecords')->paginate(20);
+$sections = CemeterySection::all();
+return view('cemeteries.plots.index', compact('plots', 'sections'));
+}
+
+
+
+Internal Server Error
+
+InvalidArgumentException
+View [cemeteries.maintenance.create] not found.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+4 vendor frames collapsed
+App\Http\Controllers\Cemeteries\CemeteryController
+:231
+createMaintenance
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Cemeteries/CemeteryController.php :231
+return view('cemeteries.maintenance.index', compact('maintenance'));
+}
+
+public function createMaintenance()
+{
+return view('cemeteries.maintenance.create');
+}
+
+public function storeMaintenance(Request $request)
+{
+
+Internal Server Error
+
+ParseError
+syntax error, unexpected token "<", expecting end of file
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+App\Models\Parking\ParkingSpace
+:69
+Composer\Autoload\{closure}
+1 vendor frame collapsed
+App\Http\Controllers\Parking\ParkingController
+:25
+index
+6 vendor frames collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Models/Parking/ParkingSpace.php :69
+];
+
+return $labels[$this->space_type] ?? $this->space_type;
+}
+}
+<?php
+
+
+
+nternal Server Error
+
+ParseError
+syntax error, unexpected token "<", expecting end of file
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+App\Models\Markets\MarketRevenueCollection
+:93
+Composer\Autoload\{closure}
+1 vendor frame collapsed
+App\Http\Controllers\Markets\MarketController
+:26
+index
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Models/Markets/MarketRevenueCollection.php :93
+);
+}
+});
+}
+}
+<?php
+
+
+
+Internal Server Error
+
+Symfony\Component\Routing\Exception\RouteNotFoundException
+Route [committee.minutes.index] not defined.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+2 vendor frames collapsed
+resources/views/committee/index.blade.php
+:80
+require
+13 vendor frames collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+resources/views/committee/index.blade.php :80
+</div>
+</div>
+</div>
+
+<div class="col-md-4 mb-4">
+<div class="card module-card" onclick="location.href='{{ route('committee.minutes.index') }}'">
+<div class="card-body text-center">
+<i class="fas fa-file-alt fa-3x text-success mb-3"></i>
+<h5>Minutes</h5>
+<p class="text-muted">Meeting minutes and records</p>
+</div>
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "business_licenses" does not exist LINE 1: select count(*) as aggregate from "business_licenses" where ... ^ (Connection: pgsql, SQL: select count(*) as aggregate from "business_licenses" where "status" = active)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+10 vendor frames collapsed
+App\Http\Controllers\Licensing\LicensingController
+:23
+index
+6 vendor frames collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Licensing/LicensingController.php :23
+public function index()
+{
+$stats = [
+'total_applications' => LicenseApplication::count(),
+'pending_applications' => LicenseApplication::where('status', 'pending')->count(),
+'active_licenses' => BusinessLicense::where('status', 'active')->count(),
+'expiring_soon' => BusinessLicense::where('expiry_date', '<=', now()->addDays(30))->count(),
+'shop_permits' => ShopPermit::where('status', 'active')->count(),
+'operating_licenses' => OperatingLicense::where('status', 'active')->count()
+];
+
+
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42703]: Undefined column: 7 ERROR: column event_permits.event_category_id does not exist LINE 1: ...m "event_permits" left join "event_categories" on "event_per... ^ (Connection: pgsql, SQL: select count(*) as aggregate from "event_permits" left join "event_categories" on "event_permits"."event_category_id" = "event_categories"."id")
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+10 vendor frames collapsed
+App\Http\Controllers\Events\EventPermitController
+:17
+index
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Events/EventPermitController.php :17
+{
+$permits = DB::table('event_permits')
+->leftJoin('event_categories', 'event_permits.event_category_id', '=', 'event_categories.id')
+->select('event_permits.*', 'event_categories.name as category_name')
+->orderBy('event_permits.created_at', 'desc')
+->paginate(20);
+

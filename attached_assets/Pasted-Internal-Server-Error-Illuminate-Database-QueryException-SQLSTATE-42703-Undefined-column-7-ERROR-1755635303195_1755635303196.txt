@@ -1,0 +1,387 @@
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42703]: Undefined column: 7 ERROR: column "is_active" does not exist LINE 1: select * from "departments" where "is_active" = $1 ^ HINT: Perhaps you meant to reference the column "departments.active". (Connection: pgsql, SQL: select * from "departments" where "is_active" = 1)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+9 vendor frames collapsed
+App\Http\Controllers\Housing\PropertyController
+:32
+create
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Housing/PropertyController.php :32
+}
+
+public function create()
+{
+$councils = Council::where('is_active', true)->get();
+$departments = Department::where('is_active', true)->get();
+$offices = Office::where('is_active', true)->get();
+
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42703]: Undefined column: 7 ERROR: column "approval_date" does not exist LINE 1: select AVG(DATEDIFF(approval_date, application_date)) as avg... ^ (Connection: pgsql, SQL: select AVG(DATEDIFF(approval_date, application_date)) as avg_days from "housing_waiting_list" where "status" = approved and "approval_date" is not null limit 1)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+11 vendor frames collapsed
+App\Http\Controllers\Housing\WaitingListController
+:27
+index
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Housing/WaitingListController.php :27
+'total_pending' => WaitingList::where('status', 'pending')->count(),
+'total_approved' => WaitingList::where('status', 'approved')->count(),
+'average_wait_time' => WaitingList::where('status', 'approved')
+->whereNotNull('approval_date')
+->selectRaw('AVG(DATEDIFF(approval_date, application_date)) as avg_days')
+->value('avg_days') ?? 0
+];
+
+
+Internal Server Error
+
+Symfony\Component\Routing\Exception\RouteNotFoundException
+Route [planning.applications] not defined.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+2 vendor frames collapsed
+resources/views/planning/create-application.blade.php
+:9
+require
+13 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+resources/views/planning/create-application.blade.php :9
+
+@section('content')
+<div class="container-fluid">
+<div class="d-flex justify-content-between align-items-center mb-4">
+<h4>📄 New Planning Application</h4>
+<a href="{{ route('planning.applications') }}" class="btn btn-secondary">
+<i class="fas fa-arrow-left me-1"></i>Back to Applications
+</a>
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42703]: Undefined column: 7 ERROR: column "status" does not exist LINE 1: ...*) as aggregate from "water_meter_readings" where "status" =... ^ (Connection: pgsql, SQL: select count(*) as aggregate from "water_meter_readings" where "status" = pending)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+10 vendor frames collapsed
+App\Http\Controllers\Water\WaterController
+:29
+index
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Water/WaterController.php :29
+$recentConnections = WaterConnection::with(['meters'])
+->latest()
+->limit(10)
+->get();
+
+$pendingReadings = WaterMeterReading::where('status', 'pending')->count();
+$qualityTests = WaterQualityTest::whereMonth('test_date', now()->month)->count();
+
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "electricity_connections" does not exist LINE 1: select count(*) as aggregate from "electricity_connections" ... ^ (Connection: pgsql, SQL: select count(*) as aggregate from "electricity_connections" where "status" = active and "electricity_connections"."deleted_at" is null)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+10 vendor frames collapsed
+App\Http\Controllers\Utilities\UtilitiesController
+:22
+index
+6 vendor frames collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Utilities/UtilitiesController.php :22
+class UtilitiesController extends Controller
+{
+public function index()
+{
+$stats = [
+'electricity_connections' => ElectricityConnection::active()->count(),
+'water_connections' => 2890, // Using existing water management
+'gas_connections' => GasConnection::active()->count(),
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42703]: Undefined column: 7 ERROR: column engineering_projects.deleted_at does not exist LINE 1: ...m "engineering_projects" where "status" != $1 and "engineeri... ^ (Connection: pgsql, SQL: select count(*) as aggregate from "engineering_projects" where "status" != completed and "engineering_projects"."deleted_at" is null)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+10 vendor frames collapsed
+App\Http\Controllers\Engineering\EngineeringController
+:23
+index
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Engineering/EngineeringController.php :23
+{
+$user = auth()->user();
+$councils = Council::all();
+
+$stats = [
+'active_projects' => EngineeringProject::where('status', '!=', 'completed')->count(),
+'pending_inspections' => BuildingInspection::where('status', 'scheduled')->count(),
+'maintenance_requests' => InfrastructureMaintenanceRequest::where('status', 'open')->count(),
+'plan
+
+
+Internal Server Error
+
+ErrorException
+Undefined variable $categories
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+resources/views/inventory/index.blade.php
+:111
+require
+13 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+resources/views/inventory/index.blade.php :111
+
+
+</div>
+<div class="col-md-2">
+<label for="category" class="form-label">Category</label>
+<select class="form-select" id="category" name="category">
+<option value="">All Categories</option>
+@foreach($categories as $category)
+<option value="{{ $category }}" {{ request('category') == $category ? 'selected' : '' }}>
+{{ $category }}
+
+
+
+
+Internal Server Error
+
+Symfony\Component\ErrorHandler\Error\FatalError
+Cannot use Illuminate\Database\Eloquent\Factories\HasFactory as HasFactory because the name is already in use
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+App\Models\Cemetery\CemeteryMaintenance
+:58
+
+app/Models/Cemetery/CemeteryMaintenance.php :58
+default => 'secondary'
+};
+}
+}
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+
+
+Internal Server Error
+
+Symfony\Component\ErrorHandler\Error\FatalError
+Cannot use Illuminate\Database\Eloquent\Factories\HasFactory as HasFactory because the name is already in use
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+App\Models\Cemetery\CemeteryMaintenance
+:58
+
+app/Models/Cemetery/CemeteryMaintenance.php :58
+default => 'secondary'
+};
+}
+}
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "parking_spaces" does not exist LINE 1: select count(*) as aggregate from "parking_spaces" where "is... ^ (Connection: pgsql, SQL: select count(*) as aggregate from "parking_spaces" where "is_active" = 1)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+10 vendor frames collapsed
+App\Http\Controllers\Parking\ParkingController
+:25
+index
+6 vendor frames collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Parking/ParkingController.php :25
+*/
+public function index()
+{
+$stats = [
+'total_zones' => ParkingZone::active()->count(),
+'total_spaces' => ParkingSpace::active()->count(),
+'available_spaces' => P
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "market_revenue_collections" does not exist LINE 1: select sum("amount_paid") as aggregate from "market_revenue_... ^ (Connection: pgsql, SQL: select sum("amount_paid") as aggregate from "market_revenue_collections" where "payment_status" = paid and extract(month from "paid_date") = 08)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+10 vendor frames collapsed
+App\Http\Controllers\Markets\MarketController
+:28
+index
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Markets/MarketController.php :28
+'total_markets' => Market::count(),
+'total_stalls' => MarketStall::count(),
+'occupied_stalls' => MarketStall::where('status', 'occupied')->count(),
+'total_revenue' => MarketRevenueCollection::where('payment_status', 'paid')
+->whereMonth('paid_date', now()->month)
+->sum('amount_paid'),
+];
+
+
+

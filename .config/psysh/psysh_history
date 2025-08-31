@@ -1,0 +1,23 @@
+$admin = \App\Models\User::where('email', 'admin@council.gov')->first();
+if ($admin) {
+    echo "Admin exists - Active: " . ($admin->active ? 'Yes' : 'No') . "\n";
+    echo "Role: " . $admin->role . "\n";
+} else {
+    echo "Admin user not found\n";
+}
+exit
+$admin = \App\Models\User::where('email', 'admin@council.gov')->first();
+$admin->active = true;
+$admin->save();
+echo "Admin account activated successfully\n";
+exit
+$admin = \App\Models\User::where('email', 'admin@council.gov')->first();
+if ($admin) {
+    echo "Admin exists - Active: " . ($admin->active ? 'Yes' : 'No') . "\n";
+    echo "Role: " . $admin->role . "\n";
+} else {
+    echo "Admin user not found\n";
+}
+exit
+Schema::dropIfExists('departments');
+exit

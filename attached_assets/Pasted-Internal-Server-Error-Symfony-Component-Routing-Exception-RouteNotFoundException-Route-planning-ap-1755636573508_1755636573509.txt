@@ -1,0 +1,650 @@
+Internal Server Error
+
+Symfony\Component\Routing\Exception\RouteNotFoundException
+Route [planning.applications.index] not defined.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+2 vendor frames collapsed
+resources/views/layouts/admin.blade.php
+:937
+require
+7 vendor frames collapsed
+resources/views/billing/index.blade.php
+:255
+require
+13 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+resources/views/layouts/admin.blade.php :937
+<i class="fas fa-drafting-compass"></i>
+<span>Planning Dashboard</span>
+</a>
+</div>
+<div class="nav-item">
+<a href="{{ route('planning.applications.index') }}" class="nav-link {{ request()->routeIs('planning.applications.*') ? 'active' : '' }}">
+<i class="fas fa-cl
+
+
+Internal Server Error
+
+InvalidArgumentException
+View [billing.services.index] not found.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+4 vendor frames collapsed
+App\Http\Controllers\Billing\MunicipalBillingController
+:151
+services
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Billing/MunicipalBillingController.php :151
+
+
+}
+
+// Services
+public function services()
+{
+return view('billing.services.index');
+}
+
+
+
+Internal Server Error
+
+Illuminate\Contracts\Container\BindingResolutionException
+Target class [HousingController] does not exist.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+10 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Middleware/AdminMiddleware.php :29
+// Check if user has admin privileges (exclude POS operators from admin access)
+if (!in_array($user->role, ['super_admin', 'admin'])) {
+abort(403, 'Access denied. Administrative privileges required.');
+}
+
+return $next($request);
+}
+
+Internal Server Error
+
+Symfony\Component\Routing\Exception\RouteNotFoundException
+Route [housing.waiting-list.recalculate] not defined.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+2 vendor frames collapsed
+resources/views/housing/waiting-list/index.blade.php
+:14
+require
+13 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+resources/views/housing/waiting-list/index.blade.php :14
+<div class="btn-group">
+<button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+Actions
+</button>
+<ul class="dropdown-menu">
+<li><a class="dropdown-item" href="{{ route('housing.waiting-list.recalculate') }}">
+<i class="fas fa-sync me-2"></i>Recalculate Positions
+</a></li>
+<li><a class="dropdo
+
+
+nternal Server Error
+
+Symfony\Component\Routing\Exception\RouteNotFoundException
+Route [planning.applications.index] not defined.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+2 vendor frames collapsed
+resources/views/planning/index.blade.php
+:94
+require
+13 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+resources/views/planning/index.blade.php :94
+</div>
+
+<!-- Quick Actions -->
+<div class="row mb-4">
+<div class="col-md-4">
+<div class="card module-card h-100" onclick="location.href='{{ route('planning.applications.index') }}'">
+<div class="card-body text-center">
+<i clas
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[22P02]: Invalid text representation: 7 ERROR: invalid input syntax for type bigint: "index" CONTEXT: unnamed portal parameter $1 = '...' (Connection: pgsql, SQL: select * from "planning_applications" where "id" = index and "planning_applications"."deleted_at" is null limit 1)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+55 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+public/index.php :51
+
+$app = require_once __DIR__.'/../bootstrap/app.php';
+
+$kernel = $app->make(Kernel::class);
+
+$response = $kernel->handle(
+$request = Request::capture()
+)->send();
+
+$kernel->terminate($request, $response);
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "water_quality_tests" does not exist LINE 1: select count(*) as aggregate from "water_quality_tests" wher... ^ (Connection: pgsql, SQL: select count(*) as aggregate from "water_quality_tests" where extract(month from "test_date") = 08)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+10 vendor frames collapsed
+App\Http\Controllers\Water\WaterController
+:30
+index
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Water/WaterController.php :30
+->latest()
+->limit(10)
+->get();
+
+$pendingReadings = WaterMeterReading::whereMonth('reading_date', now()->month)->count();
+$qualityTests = WaterQualityTest::whereMonth('test_date', now()->month)->count();
+
+
+
+Internal Server Error
+
+Symfony\Component\ErrorHandler\Error\FatalError
+Cannot declare class App\Models\Utilities\ElectricityConnection, because the name is already in use
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+App\Models\Utilities\ElectricityConnection
+:60
+
+app/Models/Utilities/ElectricityConnection.php :60
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Customer;
+
+class ElectricityConnection extends Model
+{
+use HasFactory, SoftDeletes
+
+
+Internal Server Error
+
+Error
+Class "App\Http\Controllers\Engineering\DB" not found
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+App\Http\Controllers\Engineering\EngineeringController
+:23
+index
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Engineering/EngineeringController.php :23
+
+
+{
+$user = auth()->user();
+$councils = Council::all();
+
+$stats = [
+'active_projects' => DB::table('engineering_projects')->where('status', '!=', 'completed')->count(),
+'pending_inspections' => BuildingInspection::where('status', 'scheduled')->count(),
+'maintenance_requests' => InfrastructureMaintenanceRequest::where('status', 'open')->count(),
+'planning_applications' => TownPlanningApplication::where('status', 'submitted')->count(),
+'total_assets' => AssetRegister::where('status', 'active')->count(),
+'roads_total' => RoadNetwork::count(),
+'roads_poor_condition' => RoadNetwork::where('condition', 'poor')->count(),
+
+
+
+
+nternal Server Error
+
+ErrorException
+Undefined array key "low_stock"
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+resources/views/inventory/index.blade.php
+:51
+require
+13 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+resources/views/inventory/index.blade.php :51
+<div class="col-md-3">
+<div class="card bg-warning text-white">
+<div class="card-body">
+<div class="d-flex justify-content-between">
+<div>
+<h4>{{ number_format($stats['low_stock']) }}</h4>
+<p class="mb-0">Low Stock</p>
+</div>
+<div class="align-self-center">
+<i class="bi bi-exclama
+
+
+Illuminate\Database\QueryException
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "cemetery_sections" does not exist LINE 1: select * from "cemetery_sections" ^ (Connection: pgsql, SQL: select * from "cemetery_sections")
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+10 vendor frames collapsed
+App\Http\Controllers\Cemeteries\CemeteryController
+:40
+createPlot
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Cemeteries/CemeteryController.php :40
+return view('cemeteries.plots.index', compact('plots', 'sections'));
+}
+
+public function createPlot()
+{
+$sections = CemeterySection::all();
+return view('cemeteries.plots.create', compact('sections'));
+}
+
+
+Internal Server Error
+
+Symfony\Component\ErrorHandler\Error\FatalError
+Cannot declare class App\Models\Parking\ParkingSpace, because the name is already in use
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+App\Models\Parking\ParkingSpace
+:75
+
+app/Models/Parking/ParkingSpace.php :75
+namespace App\Models\Parking;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class ParkingSpace extends Model
+{
+use HasFactory;
+
+protected $fillable = [
+
+
+Internal Server Error
+
+Symfony\Component\ErrorHandler\Error\FatalError
+Cannot declare class App\Models\Markets\MarketRevenueCollection, because the name is already in use
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+App\Models\Markets\MarketRevenueCollection
+:100
+
+app/Models/Markets/MarketRevenueCollection.php :100
+
+
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+
+class MarketRevenueCollection extends Model
+{
+
+
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "committees" does not exist LINE 1: ...mmittee_name" from "committee_members" inner join "committee... ^ (Connection: pgsql, SQL: select "committee_members".*, "committees"."name" as "committee_name" from "committee_members" inner join "committees" on "committee_members"."committee_id" = "committees"."id" where "committee_members"."status" = active)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+7 vendor frames collapsed
+App\Http\Controllers\Committee\CommitteeController
+:112
+members
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Committee/CommitteeController.php :112
+{
+$members = DB::table('committee_members')
+->join('committees', 'committee_members.committee_id', '=', 'committees.id')
+->select('committee_members.*', 'committees.name as committee_name')
+->where('committee_members.status', 'active')
+->get();
+
+
+ternal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "committees" does not exist LINE 1: ...eeting_id" = "committee_meetings"."id" inner join "committee... ^ (Connection: pgsql, SQL: select "committee_minutes".*, "committees"."name" as "committee_name", "committee_meetings"."meeting_date" from "committee_minutes" inner join "committee_meetings" on "committee_minutes"."meeting_id" = "committee_meetings"."id" inner join "committees" on "committee_meetings"."committee_id" = "committees"."id" order by "committee_meetings"."meeting_date" desc)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+7 vendor frames collapsed
+App\Http\Controllers\Committee\CommitteeController
+:201
+minutes
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Committee/CommitteeController.php :201
+$minutes = DB::table('committee_minutes')
+->join('committee_meetings', 'committee_minutes.meeting_id', '=', 'committee_meetings.id')
+->join('committees', 'committee_meetings.committee_id', '=', 'committees.id')
+->select('committee_minutes.*', 'committees.name as committee_name', 'committee_meetings.meeting_date')
+->orderBy('committee_meetings.meeting_date', 'desc')
+->get();
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "committee_agendas" does not exist LINE 1: ...e_name", "committee_meetings"."meeting_date" from "committee... ^ (Connection: pgsql, SQL: select "committee_agendas".*, "committees"."name" as "committee_name", "committee_meetings"."meeting_date" from "committee_agendas" inner join "committee_meetings" on "committee_agendas"."meeting_id" = "committee_meetings"."id" inner join "committees" on "committee_meetings"."committee_id" = "committees"."id" order by "committee_meetings"."meeting_date" desc)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+7 vendor frames collapsed
+App\Http\Controllers\Committee\CommitteeController
+:248
+agendas
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Committee/CommitteeController.php :248
+
+
+$agendas = DB::table('committee_agendas')
+->join('committee_meetings', 'committee_agendas.meeting_id', '=', 'committee_meetings.id')
+->join('committees', 'committee_meetings.committee_id', '=', 'committees.id')
+->select('committee_agendas.*', 'committees.name as committee_name', 'committee_meetings.meeting_date')
+->orderBy('committee_meetings.meeting_date', 'desc')
+->get();
+return view('committee.agendas.index', compact('agendas'));
+}
+
+
+
+
+nternal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "committee_resolutions" does not exist LINE 1: ...".*, "committees"."name" as "committee_name" from "committee... ^ (Connection: pgsql, SQL: select "committee_resolutions".*, "committees"."name" as "committee_name" from "committee_resolutions" inner join "committees" on "committee_resolutions"."committee_id" = "committees"."id" order by "resolution_date" desc)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+7 vendor frames collapsed
+App\Http\Controllers\Committee\CommitteeController
+:296
+resolutions
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Committee/CommitteeController.php :296
+
+
+{
+$resolutions = DB::table('committee_resolutions')
+->join('committees', 'committee_resolutions.committee_id', '=', 'committees.id')
+->select('committee_resolutions.*', 'committees.name as committee_name')
+->orderBy('resolution_date', 'desc')
+->get();
+
+
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "committee_public_documents" does not exist LINE 1: ...".*, "committees"."name" as "committee_name" from "committee... ^ (Connection: pgsql, SQL: select "committee_public_documents".*, "committees"."name" as "committee_name" from "committee_public_documents" inner join "committees" on "committee_public_documents"."committee_id" = "committees"."id" where "committee_public_documents"."is_public" = 1 order by "publish_date" desc)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+7 vendor frames collapsed
+App\Http\Controllers\Committee\CommitteeController
+:343
+public
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Committee/CommitteeController.php :343
+$publicDocuments = DB::table('committee_public_documents')
+->join('committees', 'committee_public_documents.committee_id', '=', 'committees.id')
+->select('committee_public_documents.*', 'committees.name as committee_name')
+->where('committee_public_documents.is_public', true)
+->orderBy('publish_date', 'desc')
+->get();
+return view('committee.public.index', compact('publicDocuments'));
+}
+
+
+

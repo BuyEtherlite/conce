@@ -1,0 +1,202 @@
+Internal Server Error
+
+Symfony\Component\Routing\Exception\RouteNotFoundException
+Route [finance.program-reports.program-performance] not defined.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+2 vendor frames collapsed
+resources/views/finance/program-reports/index.blade.php
+:13
+require
+13 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+resources/views/finance/program-reports/index.blade.php :13
+<div class="col-12">
+<div class="card">
+<div class="card-header d-flex justify-content-between align-items-center">
+<h3 class="card-title">📊 Program Based Reports</h3>
+<div class="btn-group">
+<a href="{{ route('finance.program-reports.program-performance') }}" class="btn btn-primary">
+<i class="fas fa-chart-line"></i> Program Performance
+</a>
+<a href="{{ route('finance.program-reports.budget-execution') }}" class="btn btn-info">
+<i class="fas fa-calculator"></i> Budget Execution
+</a>
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42703]: Undefined column: 7 ERROR: column "credit_amount" does not exist LINE 1: select sum("credit_amount") as aggregate from "finance_gener... ^ (Connection: pgsql, SQL: select sum("credit_amount") as aggregate from "finance_general_ledger" where exists (select * from "finance_chart_of_accounts" where "finance_general_ledger"."account_id" = "finance_chart_of_accounts"."id" and "account_type" = Revenue and "finance_chart_of_accounts"."deleted_at" is null) and "transaction_date" >= 2025-01-01 00:00:00)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+10 vendor frames collapsed
+App\Http\Controllers\Finance\BusinessIntelligenceController
+:87
+getTotalRevenue
+
+App\Http\Controllers\Finance\BusinessIntelligenceController
+:20
+index
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Finance/BusinessIntelligenceController.php :87
+private function getTotalRevenue()
+{
+return GeneralLedger::whereHas('account', function($query) {
+$query->where('account_type', 'Revenue');
+})->where('transaction_date', '>=', now()->startOfYear())
+->sum('credit_amount');
+}
+
+
+
+🏠 Housing Allocations has no side nav bar
+
+nternal Server Error
+
+ParseError
+syntax error, unexpected token "<", expecting end of file
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+app/Models/Water/WaterRate.php
+:48
+Composer\Autoload\{closure}
+1 vendor frame collapsed
+App\Http\Controllers\Water\WaterController
+:318
+ratesIndex
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Models/Water/WaterRate.php :48
+{
+return $query->where('effective_date', '<=', now())
+->orderBy('effective_date', 'desc');
+}
+}
+<?php
+
+namespace App\Models\Water;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+Internal Server Error
+
+Symfony\Component\Routing\Exception\RouteNotFoundException
+Route [water.quality.tests] not defined.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+2 vendor frames collapsed
+resources/views/water/quality/create-test.blade.php
+:9
+require
+13 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+resources/views/water/quality/create-test.blade.php :9
+
+@section('content')
+<div class="container-fluid">
+<div class="d-flex justify-content-between align-items-center mb-4">
+<h4>🧪 New Water Quality Test</h4>
+<a href="{{ route('water.quality.tests') }}" class="btn btn-secondary">
+<i class="fas fa-arrow-left me-1"></i>Back to Tests
+</a>
+</div>
+
+nternal Server Error
+
+ParseError
+syntax error, unexpected token "<", expecting end of file
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+App\Models\Utilities\GasConnection
+:52
+Composer\Autoload\{closure}
+1 vendor frame collapsed
+App\Http\Controllers\Utilities\UtilitiesController
+:24
+index
+6 vendor frames collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Models/Utilities/GasConnection.php :52
+public function scopeActive($query)
+{
+return $query->where('status', 'active');
+}
+}
+<?php
+

@@ -1,0 +1,120 @@
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42703]: Undefined column: 7 ERROR: column water_bills.deleted_at does not exist LINE 1: ..." where extract(month from "created_at") = $1 and "water_bil... ^ (Connection: pgsql, SQL: select sum("total_amount") as aggregate from "water_bills" where extract(month from "created_at") = 08 and "water_bills"."deleted_at" is null)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+
+Illuminate\Database\QueryException
+SQLSTATE[42703]: Undefined column: 7 ERROR: column engineering_projects.deleted_at does not exist LINE 1: ...m "engineering_projects" where "status" != $1 and "engineeri... ^ (Connection: pgsql, SQL: select count(*) as aggregate from "engineering_projects" where "status" != completed and "engineering_projects"."deleted_at" is null)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+SQLSTATE[42703]: Undefined column: 7 ERROR: column "minimum_stock" does not exist LINE 1: ...e from "inventory_items" where "current_stock" <= "minimum_s... ^ (Connection: pgsql, SQL: select count(*) as aggregate from "inventory_items" where "current_stock" <= "minimum_stock" and "inventory_items"."deleted_at" is null)
+
+
+
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "cemetery_maintenance" does not exist LINE 1: select count(*) as aggregate from "cemetery_maintenance" whe... ^ (Connection: pgsql, SQL: select count(*) as aggregate from "cemetery_maintenance" where "status" = scheduled)
+
+ParseError
+syntax error, unexpected token "<", expecting end of file
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+App\Models\Housing\Allocation
+:155
+Composer\Autoload\{closure}
+1 vendor frame collapsed
+App\Http\Controllers\Housing\HousingController
+:26
+index
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Models/Housing/Allocation.php :155
+
+
+SQLSTATE[42703]: Undefined column: 7 ERROR: column "is_active" does not exist LINE 1: ... count(*) as aggregate from "parking_zones" where "is_active... ^ (Connection: pgsql, SQL: select count(*) as aggregate from "parking_zones" where "is_active" = 1)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+10 vendor frames collapsed
+App\Http\Controllers\Parking\ParkingController
+:24
+index
+6 vendor frames collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Parking/ParkingController.php :24
+
+SQLSTATE[42703]: Undefined column: 7 ERROR: column markets.deleted_at does not exist LINE 1: select count(*) as aggregate from "markets" where "markets".... ^ (Connection: pgsql, SQL: select count(*) as aggregate from "markets" where "markets"."deleted_at" is null)
+
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "committee_members" does not exist LINE 1: select count(*) as aggregate from "committee_members" where ... ^ (Connection: pgsql, SQL: select count(*) as aggregate from "committee_members" where "status" = active)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+9 vendor frames collapsed
+resources/views/committee/index.blade.php
+:21
+require
+13 vendor frames collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+resources/views/committee/index.blade.php :21
+
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "license_applications" does not exist LINE 1: select count(*) as aggregate from "license_applications" ^ (Connection: pgsql, SQL: select count(*) as aggregate from "license_applications")
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+13 vendor frames collapsed
+App\Http\Controllers\Licensing\LicensingController
+:21
+index
+6 vendor frames collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Licensing/LicensingController.php :21

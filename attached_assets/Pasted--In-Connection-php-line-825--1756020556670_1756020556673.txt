@@ -1,0 +1,39 @@
+
+In Connection.php line 825:
+                                                                               
+  SQLSTATE[2BP01]: Dependent objects still exist: 7 ERROR:  cannot drop table  
+   currencies because other objects depend on it                               
+  DETAIL:  constraint cashbook_entries_currency_code_foreign on table cashboo  
+  k_entries depends on table currencies                                        
+  constraint debtor_transactions_currency_code_foreign on table debtor_transa  
+  ctions depends on table currencies                                           
+  constraint exchange_rate_histories_currency_code_foreign on table exchange_  
+  rate_histories depends on table currencies                                   
+  constraint fdms_receipts_currency_code_foreign on table fdms_receipts depen  
+  ds on table currencies                                                       
+  constraint fixed_assets_currency_code_foreign on table fixed_assets depends  
+   on table currencies                                                         
+  constraint vouchers_currency_code_foreign on table vouchers depends on tabl  
+  e currencies                                                                 
+  HINT:  Use DROP ... CASCADE to drop the dependent objects too. (Connection:  
+   sqlite, SQL: drop table if exists "currencies")                             
+                                                                               
+
+In Connection.php line 571:
+                                                                               
+  SQLSTATE[2BP01]: Dependent objects still exist: 7 ERROR:  cannot drop table  
+   currencies because other objects depend on it                               
+  DETAIL:  constraint cashbook_entries_currency_code_foreign on table cashboo  
+  k_entries depends on table currencies                                        
+  constraint debtor_transactions_currency_code_foreign on table debtor_transa  
+  ctions depends on table currencies                                           
+  constraint exchange_rate_histories_currency_code_foreign on table exchange_  
+  rate_histories depends on table currencies                                   
+  constraint fdms_receipts_currency_code_foreign on table fdms_receipts depen  
+  ds on table currencies                                                       
+  constraint fixed_assets_currency_code_foreign on table fixed_assets depends  
+   on table currencies                                                         
+  constraint vouchers_currency_code_foreign on table vouchers depends on tabl  
+  e currencies                                                                 
+  HINT:  Use DROP ... CASCADE to drop the dependent objects too.               
+                                                                               

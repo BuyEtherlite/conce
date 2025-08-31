@@ -1,0 +1,138 @@
+all to undefined method stdClass::getIcon()
+
+Expand vendor frames
+resources
+ / 
+views
+ / 
+council-admin
+ / 
+modules
+ / 
+index.blade
+.php
+ 
+: 37
+require
+13 vendor frames
+App
+ \ 
+Http
+ \ 
+Middleware
+ \ 
+AdminMiddleware
+ 
+: 53
+handle
+42 vendor frames
+public
+ / 
+index
+.php
+ 
+: 51
+require_once
+1 vendor frame
+resources
+ / 
+views
+ / 
+council-admin
+ / 
+modules
+ / 
+index.blade
+.php
+ 
+: 37
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="alert alert-info">
+
+                        <i class="fas fa-info-circle me-2"></i>
+
+                        Manage system modules and their individual features. Core modules cannot be disabled.
+
+                    </div>
+
+
+
+                    <div class="row">
+
+                        @foreach($modules as $module)
+
+                        <div class="col-lg-6 col-xl-4 mb-4">
+
+                            <div class="card module-card h-100 {{ $module->is_active ? 'border-success' : 'border-secondary' }}">
+
+                                <div class="card-header bg-light">
+
+                                    <div class="d-flex justify-content-between align-items-center">
+
+                                        <div class="d-flex align-items-center">
+
+                                            <i class="fas fa-{{ $module->getIcon() }} fa-lg me-2 text-{{ $module->is_active ? 'success' : 'secondary' }}"></i>
+
+                                            <div>
+
+                                                <h6 class="mb-0">{{ $module->getDisplayName() }}</h6>
+
+                                                @if($module->isCore())
+
+                                                <small class="badge bg-primary">Core Module</small>
+
+                                                @endif
+
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <!-- Module Toggle Switch -->
+
+                                        <div class="d-flex align-items-center">
+
+                                        <div class="form-check form-switch me-3">
+
+                                            <input class="form-check-input module-toggle"
+
+                                                   type="checkbox"
+
+                                                   id="module_{{ $module->id }}"

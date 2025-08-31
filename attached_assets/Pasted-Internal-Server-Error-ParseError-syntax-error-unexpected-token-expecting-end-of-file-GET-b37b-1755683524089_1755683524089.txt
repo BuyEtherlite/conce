@@ -1,0 +1,126 @@
+Internal Server Error
+
+ParseError
+syntax error, unexpected token "<", expecting end of file
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+app/Models/Committee/CommitteeAgenda.php
+:34
+Composer\Autoload\{closure}
+1 vendor frame collapsed
+App\Http\Controllers\Committee\CommitteeController
+:359
+agendas
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Models/Committee/CommitteeAgenda.php :34
+public function meeting()
+{
+return $this->belongsTo(CommitteeMeeting::class, 'meeting_id');
+}
+}
+<?php
+
+namespace App\Models\Committee;
+
+ 
+
+Maintain the committee sub nave across all committee related views
+
+
+Internal Server Error
+
+ParseError
+syntax error, unexpected token "<", expecting end of file
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+app/Models/Committee/CommitteeMinute.php
+:49
+Composer\Autoload\{closure}
+1 vendor frame collapsed
+App\Http\Controllers\Committee\CommitteeController
+:257
+minutes
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Models/Committee/CommitteeMinute.php :49
+public function approvedBy()
+{
+return $this->belongsTo(User::class, 'approved_by');
+}
+}
+<?php
+
+
+
+Internal Server Error
+
+Symfony\Component\Routing\Exception\RouteNotFoundException
+Route [committee.members] not defined.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+2 vendor frames collapsed
+resources/views/committee/members/create.blade.php
+:10
+require
+13 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+resources/views/committee/members/create.blade.php :10
+
+@section('content')
+<div class="container-fluid">
+<div class="d-flex justify-content-between align-items-center mb-4">
+<h4>👥 Add Committee Member</h4>
+<a href="{{ route('committee.members') }}" class="btn btn-secondary">
+<i class="bi bi-arrow-left"></i> Back to Members
+</a>
+
+
+View download edit and new resolution are not working in Committee resolutions 

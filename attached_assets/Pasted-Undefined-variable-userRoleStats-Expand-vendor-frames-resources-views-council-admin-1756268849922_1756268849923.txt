@@ -1,0 +1,134 @@
+Undefined variable $userRoleStats
+
+Expand vendor frames
+resources
+ / 
+views
+ / 
+council-admin
+ / 
+dashboard.blade
+.php
+ 
+: 105
+require
+13 vendor frames
+App
+ \ 
+Http
+ \ 
+Middleware
+ \ 
+AdminMiddleware
+ 
+: 43
+handle
+42 vendor frames
+public
+ / 
+index
+.php
+ 
+: 51
+require_once
+1 vendor frame
+resources
+ / 
+views
+ / 
+council-admin
+ / 
+dashboard.blade
+.php
+ 
+: 105
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Content Row -->
+
+    <div class="row">
+
+        <!-- User Role Distribution -->
+
+        <div class="col-xl-6 col-lg-6">
+
+            <div class="card shadow mb-4">
+
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+
+                    <h6 class="m-0 font-weight-bold text-primary">User Role Distribution</h6>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        @foreach($userRoleStats as $role => $count)
+
+                        <div class="col-md-6 mb-3">
+
+                            <div class="d-flex align-items-center">
+
+                                <div class="mr-3">
+
+                                    @switch($role)
+
+                                        @case('super_admin')
+
+                                            <i class="fas fa-crown text-warning"></i>
+
+                                            @break
+
+                                        @case('admin')
+
+                                            <i class="fas fa-user-shield text-danger"></i>
+
+                                            @break
+
+                                        @case('manager')
+
+                                            <i class="fas fa-user-tie text-info"></i>
+
+                                            @break
+
+                                        @default

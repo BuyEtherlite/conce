@@ -1,0 +1,119 @@
+Internal Server Error
+
+Illuminate\Contracts\Container\BindingResolutionException
+Target class [HousingController] does not exist.
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+10 vendor frames collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Middleware/EnsureInstalled.php :23
+
+
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42P01]: Undefined table: 7 ERROR: relation "water_quality_tests" does not exist LINE 1: select count(*) as aggregate from "water_quality_tests" wher... ^ (Connection: pgsql, SQL: select count(*) as aggregate from "water_quality_tests" where extract(month from "test_date") = 08)
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+10 vendor frames collapsed
+App\Http\Controllers\Water\WaterController
+:30
+index
+6 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Water/WaterController.php :30
+->latest()
+->limit(10)
+->get();
+
+$pendingReadings = WaterMeterReading::whereMonth('reading_date', now()->month)->count();
+$qualityTests = WaterQualityTest::whereMonth('test_date', now()->month)->count();
+
+
+
+Internal Server Error
+
+Symfony\Component\ErrorHandler\Error\FatalError
+Cannot declare class App\Models\Utilities\ElectricityConnection, because the name is already in use
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+App\Models\Utilities\ElectricityConnection
+:60
+
+app/Models/Utilities/ElectricityConnection.php :60
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Customer;
+
+class ElectricityConnection extends Model
+{
+
+Internal Server Error
+
+ErrorException
+Undefined array key "low_stock"
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+Expand
+vendor frames
+
+
+
+resources/views/inventory/index.blade.php
+:51
+require
+13 vendor frames collapsed
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+resources/views/inventory/index.blade.php :51
+<div class="col-md-3">
+<div class="card bg-warning text-white">
+<div class="card-body">
+<div class="d-flex justify-content-between">
+<div>
+<h4>{{ number_format($stats['low_stock']) }}</h4>
+<p class="mb-0">Low Stock</p>
+</div>
+

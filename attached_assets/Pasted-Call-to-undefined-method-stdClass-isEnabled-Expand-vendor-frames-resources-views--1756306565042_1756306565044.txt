@@ -1,0 +1,138 @@
+Call to undefined method stdClass::isEnabled()
+
+Expand vendor frames
+resources
+ / 
+views
+ / 
+council-admin
+ / 
+modules
+ / 
+index.blade
+.php
+ 
+: 135
+require
+13 vendor frames
+App
+ \ 
+Http
+ \ 
+Middleware
+ \ 
+AdminMiddleware
+ 
+: 49
+handle
+42 vendor frames
+public
+ / 
+index
+.php
+ 
+: 51
+require_once
+1 vendor frame
+resources
+ / 
+views
+ / 
+council-admin
+ / 
+modules
+ / 
+index.blade
+.php
+ 
+: 135
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                </div>
+
+                                                @endforeach
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    @else
+
+                                    <div class="text-center py-3">
+
+                                        <i class="fas fa-cog text-muted"></i>
+
+                                        <small class="text-muted d-block">No configurable features</small>
+
+                                    </div>
+
+                                    @endif
+
+                                </div>
+
+
+
+                                <div class="card-footer bg-transparent">
+
+                                    <div class="d-flex justify-content-between align-items-center">
+
+                                        <span class="badge bg-{{ $module->isEnabled() ? 'success' : 'secondary' }}">
+
+                                            {{ $module->isEnabled() ? 'Active' : 'Inactive' }}
+
+                                        </span>
+
+                                        @if(isset($module->is_core) && $module->isCore())
+
+                                        <small class="text-muted">
+
+                                            <i class="fas fa-lock me-1"></i>
+
+                                            Protected
+
+                                        </small>
+
+                                        @endif
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        @endforeach
+
+                    </div>

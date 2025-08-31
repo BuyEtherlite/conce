@@ -1,0 +1,48 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Handle Angular/React routes (if any frontend assets)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} \.(js|css|png|jpg|gif|ico|svg|woff|woff2|ttf|eot)$ [NC]
+    RewriteRule ^(.*)$ /public/$1 [L]
+
+    # Redirect everything to public folder except existing files/dirs
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ /public/$1 [L,QSA]
+
+    # Handle requests that go to public folder
+    RewriteCond %{REQUEST_URI} ^/public/
+    RewriteRule ^public/(.*)$ /public/index.php [L,QSA]
+</IfModule>
+
+# Security headers for production
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# Prevent access to sensitive files
+<Files ".env">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "composer.json">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "composer.lock">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Deny access to vendor and storage directories from root
+RedirectMatch 403 ^/vendor/.*$
+RedirectMatch 403 ^/storage/.*$
+RedirectMatch 403 ^/bootstrap/cache/.*$

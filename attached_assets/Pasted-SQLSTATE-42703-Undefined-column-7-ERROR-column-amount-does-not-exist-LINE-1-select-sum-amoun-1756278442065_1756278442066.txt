@@ -1,0 +1,162 @@
+SQLSTATE[42703]: Undefined column: 7 ERROR: column "amount" does not exist LINE 1: select sum("amount") as aggregate from "finance_general_ledg... ^
+select sum("amount") as aggregate from "finance_general_ledger" where exists (select * from "finance_chart_of_accounts" where "finance_general_ledger"."account_id" = "finance_chart_of_accounts"."id" and "account_type" = revenue and "finance_chart_of_accounts"."deleted_at" is null) and "transaction_date"::text like 2025-08% and "transaction_type" = credit
+
+
+
+Expand vendor frames
+10 vendor frames
+App
+ \ 
+Modules
+ \ 
+Finance
+ \ 
+Controllers
+ \ 
+FinanceController
+ 
+: 123
+getMonthlyRevenue
+App
+ \ 
+Modules
+ \ 
+Finance
+ \ 
+Controllers
+ \ 
+FinanceController
+ 
+: 24
+index
+6 vendor frames
+App
+ \ 
+Http
+ \ 
+Middleware
+ \ 
+CheckModuleAccess
+ 
+: 19
+handle
+1 vendor frame
+App
+ \ 
+Http
+ \ 
+Middleware
+ \ 
+AdminMiddleware
+ 
+: 49
+handle
+42 vendor frames
+public
+ / 
+index
+.php
+ 
+: 51
+require_once
+1 vendor frame
+app
+ / 
+Modules
+ / 
+Finance
+ / 
+Controllers
+ / 
+FinanceController
+.php
+ 
+: 123
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {
+
+        return ChartOfAccount::where('account_type', 'liability')
+
+            ->where('is_active', true)
+
+            ->sum('current_balance');
+
+    }
+
+
+
+    private function getMonthlyRevenue()
+
+    {
+
+        $currentMonth = Carbon::now()->format('Y-m');
+
+
+
+        return GeneralLedger::whereHas('account', function($query) {
+
+                $query->where('account_type', 'revenue');
+
+            })
+
+            ->where('transaction_date', 'like', $currentMonth . '%')
+
+            ->where('transaction_type', 'credit')
+
+            ->sum('amount');
+
+    }
+
+
+
+    private function getMonthlyExpenses()
+
+    {
+
+        $currentMonth = Carbon::now()->format('Y-m');
+
+
+
+        return GeneralLedger::whereHas('account', function($query) {
+
+                $query->where('account_type', 'expense');
+
+            })
+
+            ->where('transaction_date', 'like', $currentMonth . '%')
+
+            ->where('transaction_type', 'debit')
+
+            ->sum('amount');
+
+    }

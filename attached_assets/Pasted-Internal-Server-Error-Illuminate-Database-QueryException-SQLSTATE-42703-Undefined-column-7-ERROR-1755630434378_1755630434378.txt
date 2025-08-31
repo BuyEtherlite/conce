@@ -1,0 +1,52 @@
+Internal Server Error
+
+Illuminate\Database\QueryException
+SQLSTATE[42703]: Undefined column: 7 ERROR: column finance_general_ledger.status does not exist LINE 1: ..._ledger"."transaction_date" between $3 and $4 and "finance_g... ^ (Connection: pgsql, SQL: select finance_chart_of_accounts.account_code, SUM(finance_general_ledger.amount) as amount from "finance_general_ledger" inner join "finance_chart_of_accounts" on "finance_general_ledger"."account_id" = "finance_chart_of_accounts"."id" where "finance_chart_of_accounts"."account_type" = revenue and "finance_chart_of_accounts"."account_category" = exchange_revenue and "finance_general_ledger"."transaction_date" between 2025-01-01 and 2025-08-19 and "finance_general_ledger"."status" = posted and "finance_chart_of_accounts"."deleted_at" is null group by "finance_chart_of_accounts"."account_code")
+GET b37b2e2b-dc68-4a05-a4bf-a177f0adf93c-00-3ojsxvorydoml.worf.replit.dev
+PHP 8.2.23 — Laravel 11.45.1
+
+Expand
+vendor frames
+9 vendor frames collapsed
+
+App\Http\Controllers\Finance\IpsasReportController
+:551
+getRevenueByCategory
+
+App\Http\Controllers\Finance\IpsasReportController
+:55
+statementFinancialPerformance
+6 vendor frames collapsed
+
+App\Http\Middleware\AdminMiddleware
+:29
+handle
+1 vendor frame collapsed
+
+App\Http\Middleware\EnsureInstalled
+:23
+handle
+42 vendor frames collapsed
+
+public/index.php
+:51
+require_once
+1 vendor frame collapsed
+app/Http/Controllers/Finance/IpsasReportController.php :551
+            }
+        }
+ 
+        return $query->selectRaw('finance_chart_of_accounts.account_code, SUM(finance_general_ledger.amount) as amount')
+                   ->groupBy('finance_chart_of_accounts.account_code')
+                   ->get();
+    }
+ 
+    private function getExpensesByCategory($category, $startDate, $endDate, $currency)
+    {
+        $query = GeneralLedger::join('finance_chart_of_accounts', 'finance_general_ledger.account_id', '=', 'finance_chart_of_accounts.id')
+                ->where('finance_chart_of_accounts.account_type', 'expense')
+                ->where('finance_chart_of_accounts.account_category', $category)
+                ->whereBetween('finance_general_ledger.transaction_date', [$startDate, $endDate])
+                ->where('finance_general_ledger.status', 'posted')
+                ->whereNull('finance_chart_of_accounts.deleted_at');
+ 
