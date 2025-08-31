@@ -9,12 +9,12 @@ class ChartOfAccountController extends Controller
 {
     public function index()
     {
-        return view('finance/chart-of-accounts.index');
+        return view('finance/chartofaccount.index');
     }
 
     public function create()
     {
-        return view('finance/chart-of-accounts.create');
+        return view('finance/chartofaccount.create');
     }
 
     public function store(Request $request)
@@ -25,12 +25,12 @@ class ChartOfAccountController extends Controller
 
     public function show($id)
     {
-        return view('finance/chart-of-accounts.show', compact('id'));
+        return view('finance/chartofaccount.show', compact('id'));
     }
 
     public function edit($id)
     {
-        return view('finance/chart-of-accounts.edit', compact('id'));
+        return view('finance/chartofaccount.edit', compact('id'));
     }
 
     public function update(Request $request, $id)
