@@ -404,27 +404,3 @@ class HrController extends Controller
     public function currencyRates() { return view('hr.currency.rates'); }
     public function updateCurrencyRates() { return redirect()->route('hr.currency.rates'); }
 }
-<?php
-
-namespace App\Modules\HR\Controllers;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-class HrController extends Controller
-{
-    public function index()
-    {
-        return view('hr.index');
-    }
-
-    public function employees()
-    {
-        return view('hr.employees.index');
-    }
-
-    public function attendance()
-    {
-        return view('hr.attendance.index');
-    }
-}
