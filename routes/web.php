@@ -364,7 +364,10 @@ Route::middleware(['auth', 'admin'])->prefix('council-admin')->name('council-adm
 });
 
 // Administration Module Routes
-Route::middleware(['auth'])->prefix('administration')->name('administration.')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('administration')->name('administration.')->group(function () {
+    
+    // Main Administration Index
+    Route::get('/', [CoreModulesController::class, 'index'])->name('index');
     
     // Core Modules
     Route::get('/core-modules', [CoreModulesController::class, 'index'])->name('core-modules.index');
