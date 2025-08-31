@@ -51,4 +51,26 @@ class AdministrationRouteTest extends TestCase
         // Should not throw RouteNotFoundException and should be successful
         $response->assertStatus(200);
     }
+
+    /**
+     * Test that the administration.index route requires admin role
+     */
+    public function test_administration_index_requires_admin_role()
+    {
+        // Create a regular user (not admin)
+        $user = User::factory()->create([
+            'name' => 'Regular User',
+            'email' => 'user@example.com',
+            'role' => 'user'
+        ]);
+
+        // Test accessing the route as a non-admin user
+        $response = $this->actingAs($user)->get(route('administration.index'));
+
+        // Should redirect or return unauthorized (depending on admin middleware implementation)
+        $this->assertTrue(
+            $response->status() === 403 || $response->status() === 302,
+            'Non-admin users should not have access to administration.index'
+        );
+    }
 }
