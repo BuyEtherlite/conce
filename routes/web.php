@@ -275,6 +275,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/applications/{application}', [PlanningController::class, 'updateApplication'])->name('applications.update');
         Route::delete('/applications/{application}', [PlanningController::class, 'destroyApplication'])->name('applications.destroy');
         Route::get('/approvals', [PlanningController::class, 'approvals'])->name('approvals');
+        Route::get('/approvals/create', [PlanningController::class, 'createApproval'])->name('approvals.create');
         Route::get('/zoning', [PlanningController::class, 'zoning'])->name('zoning');
         Route::get('/zoning/create', [PlanningController::class, 'createZoning'])->name('zoning.create');
         Route::post('/zoning', [PlanningController::class, 'storeZoning'])->name('zoning.store');
@@ -350,16 +351,22 @@ Route::middleware(['auth', 'admin'])->prefix('council-admin')->name('council-adm
     // Users
     Route::get('/users', [CouncilAdminUserController::class, 'index'])->name('users.index');
     
+    // Departments
+    Route::resource('departments', AdminDepartmentController::class);
+    
+    // Offices
+    Route::resource('offices', AdminModuleOfficeController::class);
+    
     // Settings
-    Route::get('/settings', [ModuleController::class, 'settings'])->name('settings');
+    Route::get('/settings', [ModuleController::class, 'settings'])->name('settings.index');
     Route::get('/settings/modules', [ModuleController::class, 'settingsModules'])->name('settings.modules');
     Route::get('/settings/security', [ModuleController::class, 'settingsSecurity'])->name('settings.security');
     
     // System
-    Route::get('/system', [CouncilAdminDashboardController::class, 'system'])->name('system');
+    Route::get('/system', [CouncilAdminDashboardController::class, 'system'])->name('system.index');
     
     // Reports
-    Route::get('/reports', [CouncilAdminDashboardController::class, 'reports'])->name('reports');
+    Route::get('/reports', [CouncilAdminDashboardController::class, 'reports'])->name('reports.index');
     Route::get('/reports/audit-logs', [CouncilAdminDashboardController::class, 'auditLogs'])->name('reports.audit-logs');
 });
 
@@ -651,6 +658,8 @@ Route::middleware(['auth'])->prefix('finance')->name('finance.')->group(function
         Route::get('/suppliers/{supplier}', [ProcurementController::class, 'showSupplier'])->name('suppliers.show');
         Route::get('/suppliers/{supplier}/edit', [ProcurementController::class, 'editSupplier'])->name('suppliers.edit');
         Route::put('/suppliers/{supplier}', [ProcurementController::class, 'updateSupplier'])->name('suppliers.update');
+        Route::post('/suppliers/{supplier}/activate', [ProcurementController::class, 'activateSupplier'])->name('suppliers.activate');
+        Route::post('/suppliers/{supplier}/deactivate', [ProcurementController::class, 'deactivateSupplier'])->name('suppliers.deactivate');
         Route::get('/reports', [ProcurementController::class, 'reports'])->name('reports');
     });
     
@@ -1088,6 +1097,7 @@ Route::middleware(['auth'])->prefix('markets')->name('markets.')->group(function
     Route::get('/', [StallController::class, 'index'])->name('index');
     Route::get('/create', [StallController::class, 'create'])->name('create');
     Route::post('/', [StallController::class, 'store'])->name('store');
+    Route::get('/{market}', [StallController::class, 'show'])->name('show');
     Route::get('/dashboard', [StallController::class, 'dashboard'])->name('dashboard');
     
     // Vendors
