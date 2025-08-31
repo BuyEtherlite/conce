@@ -1,4 +1,3 @@
-
 @extends('layouts.council-admin')
 
 @section('title', 'Council Admin Dashboard')

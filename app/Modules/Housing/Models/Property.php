@@ -11,7 +11,9 @@ class Property extends Model
 
     protected $table = 'properties';
 
-    protected $fillable = ['property_code', 'title', 'description', 'property_type', 'address', 'suburb', 'city', 'postal_code', 'province', 'country', 'latitude', 'longitude', 'size_sqm', 'size_hectares', 'erf_number', 'title_deed_number', 'title_deed_date', 'surveyor_general_code', 'category_id', 'zone_id', 'market_value', 'municipal_value', 'rental_amount', 'ownership_type', 'status', 'amenities', 'utilities', 'accessibility_features', 'notes', 'council_id', 'office_id', 'created_by', 'updated_by'];
+    protected $fillable = [
+        // Add fillable fields here
+    ];
 
     protected $dates = [
         'created_at',

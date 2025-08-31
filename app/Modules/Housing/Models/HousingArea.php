@@ -2,46 +2,26 @@
 
 namespace App\Modules\Housing\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HousingArea extends Model
 {
-    use HasFactory;
+    use SoftDeletes;
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'housing_areas';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'name',
-        'description',
-        'zone',
-        'is_active',
+        // Add fillable fields here
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
+
     protected $casts = [
-        'is_active' => 'boolean',
+        // Add casts here
     ];
-
-    /**
-     * Get the properties in this area.
-     */
-    public function properties()
-    {
-        return $this->hasMany(HousingProperty::class, 'area_id');
-    }
 }
