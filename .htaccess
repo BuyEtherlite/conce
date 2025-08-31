@@ -1,13 +1,11 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Handle Angular/React routes (if any frontend assets)
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} \.(js|css|png|jpg|gif|ico|svg|woff|woff2|ttf|eot)$ [NC]
-    RewriteRule ^(.*)$ /public/$1 [L]
+    # Force HTTPS (for shared hosting)
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    # Redirect everything to public folder except existing files/dirs
+    # Handle Laravel routes in public folder
     RewriteCond %{REQUEST_URI} !^/public/
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
@@ -24,6 +22,8 @@
     Header always set X-Frame-Options DENY
     Header always set X-XSS-Protection "1; mode=block"
     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:;"
 </IfModule>
 
 # Prevent access to sensitive files
@@ -42,7 +42,46 @@
     Deny from all
 </Files>
 
+<Files "artisan">
+    Order allow,deny
+    Deny from all
+</Files>
+
 # Deny access to vendor and storage directories from root
 RedirectMatch 403 ^/vendor/.*$
 RedirectMatch 403 ^/storage/.*$
 RedirectMatch 403 ^/bootstrap/cache/.*$
+RedirectMatch 403 ^/database/.*$
+RedirectMatch 403 ^/config/.*$
+RedirectMatch 403 ^/app/.*$
+RedirectMatch 403 ^/resources/.*$
+RedirectMatch 403 ^/routes/.*$
+RedirectMatch 403 ^/tests/.*$
+
+# Cache static assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType application/pdf "access plus 1 month"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# Gzip compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>

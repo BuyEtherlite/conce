@@ -45,32 +45,3 @@ class HealthController extends Controller
         return redirect()->back()->with('success', 'Deleted successfully');
     }
 }
-<?php
-
-namespace App\Modules\Health\Controllers;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-class HealthController extends Controller
-{
-    public function index()
-    {
-        return view('health.index');
-    }
-
-    public function facilities()
-    {
-        return view('health.facilities.index');
-    }
-
-    public function inspections()
-    {
-        return view('health.inspections.index');
-    }
-
-    public function permits()
-    {
-        return view('health.permits.index');
-    }
-}
