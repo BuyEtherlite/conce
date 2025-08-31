@@ -371,6 +371,122 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--secondary-gradient);
         }
+
+        /* Global Search Enhancements */
+        .navbar-search {
+            position: relative;
+        }
+
+        .search-results-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            z-index: 1050;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .search-results-dropdown.show {
+            display: block;
+        }
+
+        .search-loading {
+            padding: 1rem;
+            text-align: center;
+            color: #6c757d;
+        }
+
+        .search-item {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f8f9fa;
+            cursor: pointer;
+            transition: background-color 0.15s ease-in-out;
+        }
+
+        .search-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .search-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-item-title {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 0.25rem;
+        }
+
+        .search-item-description {
+            font-size: 0.875rem;
+            color: #6c757d;
+            margin-bottom: 0.25rem;
+        }
+
+        .search-item-type {
+            font-size: 0.75rem;
+            color: #868e96;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .search-no-results {
+            padding: 1rem;
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .search-category {
+            padding: 0.5rem 1rem;
+            background-color: #f8f9fa;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #495057;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        /* Enhanced Module Icons */
+        .nav-link i {
+            width: 24px;
+            margin-right: 1rem;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover i {
+            transform: scale(1.15) rotate(5deg);
+            color: #ffffff;
+        }
+
+        .nav-link.active i {
+            color: #ffffff;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            transform: scale(1.1);
+        }
+
+        /* Quick Access Keyboard Shortcuts */
+        .search-shortcut {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            color: #6c757d;
+            background: #f8f9fa;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            border: 1px solid #dee2e6;
+        }
     </style>
 </head>
 <body id="page-top">
@@ -407,7 +523,7 @@
             <!-- Nav Item - Finance -->
             <li class="nav-item {{ Request::routeIs('finance.*') ? 'active' : '' }}">
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseFinance" aria-expanded="true" aria-controls="collapseFinance">
-                    <i class="fas fa-fw fa-dollar-sign"></i>
+                    <i class="fas fa-fw fa-chart-line"></i>
                     <span>Finance</span>
                 </a>
                 <div id="collapseFinance" class="collapse {{ Request::routeIs('finance.*') ? 'show' : '' }}" aria-labelledby="headingFinance" data-parent="#accordionSidebar">
@@ -479,7 +595,7 @@
             <!-- Nav Item - HR -->
             <li class="nav-item {{ Request::routeIs('hr.*') ? 'active' : '' }}">
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseHR" aria-expanded="true" aria-controls="collapseHR">
-                    <i class="fas fa-fw fa-users"></i>
+                    <i class="fas fa-fw fa-user-tie"></i>
                     <span>Human Resources</span>
                 </a>
                 <div id="collapseHR" class="collapse {{ Request::routeIs('hr.*') ? 'show' : '' }}" aria-labelledby="headingHR" data-parent="#accordionSidebar">
@@ -496,7 +612,7 @@
             <!-- Nav Item - Committee -->
             <li class="nav-item {{ Request::routeIs('committee.*') ? 'active' : '' }}">
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCommittee" aria-expanded="true" aria-controls="collapseCommittee">
-                    <i class="fas fa-fw fa-users-cog"></i>
+                    <i class="fas fa-fw fa-users"></i>
                     <span>Committee</span>
                 </a>
                 <div id="collapseCommittee" class="collapse {{ Request::routeIs('committee.*') ? 'show' : '' }}" aria-labelledby="headingCommittee" data-parent="#accordionSidebar">
@@ -522,7 +638,7 @@
             <!-- Nav Item - Engineering -->
             <li class="nav-item {{ Request::routeIs('engineering.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('engineering.index') }}">
-                    <i class="fas fa-fw fa-tools"></i>
+                    <i class="fas fa-fw fa-hammer"></i>
                     <span>Engineering</span>
                 </a>
             </li>
@@ -546,7 +662,7 @@
             <!-- Nav Item - Administration -->
             <li class="nav-item {{ Request::routeIs('administration.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('administration.index') }}">
-                    <i class="fas fa-fw fa-cogs"></i>
+                    <i class="fas fa-fw fa-handshake"></i>
                     <span>CRM</span>
                 </a>
             </li>
@@ -563,7 +679,7 @@
             @if(auth()->check() && auth()->user()->role === 'admin')
             <li class="nav-item {{ Request::routeIs('council-admin.*') ? 'active' : '' }}">
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdmin" aria-expanded="true" aria-controls="collapseAdmin">
-                    <i class="fas fa-fw fa-crown"></i>
+                    <i class="fas fa-fw fa-shield-alt"></i>
                     <span>Council Admin</span>
                 </a>
                 <div id="collapseAdmin" class="collapse {{ Request::routeIs('council-admin.*') ? 'show' : '' }}" aria-labelledby="headingAdmin" data-parent="#accordionSidebar">
@@ -607,14 +723,28 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto navbar-search">
+                    <form class="d-none d-sm-inline-block form-inline mr-auto navbar-search" id="globalSearchForm">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" 
+                                   class="form-control bg-light border-0 small" 
+                                   placeholder="Search modules, customers, requests..." 
+                                   aria-label="Search" 
+                                   aria-describedby="basic-addon2"
+                                   id="globalSearchInput"
+                                   autocomplete="off">
+                            <div class="search-shortcut">⌘K</div>
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
+                                <button class="btn btn-primary" type="submit" id="globalSearchBtn">
                                     <i class="fas fa-search fa-sm"></i>
                                 </button>
                             </div>
+                        </div>
+                        <!-- Search Results Dropdown -->
+                        <div class="search-results-dropdown" id="searchResults">
+                            <div class="search-loading d-none">
+                                <i class="fas fa-spinner fa-spin"></i> Searching...
+                            </div>
+                            <div class="search-content"></div>
                         </div>
                     </form>
 
@@ -724,6 +854,153 @@
                     card.style.transform = 'translateY(0)';
                 }, index * 100);
             });
+
+            // Global Search Functionality
+            const searchInput = document.getElementById('globalSearchInput');
+            const searchResults = document.getElementById('searchResults');
+            const searchForm = document.getElementById('globalSearchForm');
+            let searchTimeout;
+
+            if (searchInput && searchResults) {
+                // Search modules and quick actions
+                const searchData = [
+                    // Core Modules
+                    { title: 'Finance Management', description: 'Manage accounts, budgets, and financial reports', type: 'module', url: '{{ route("finance.index") }}' },
+                    { title: 'Housing Management', description: 'Property management and tenant services', type: 'module', url: '{{ route("housing.index") }}' },
+                    { title: 'Water Management', description: 'Water connections and billing', type: 'module', url: '{{ route("water.index") }}' },
+                    { title: 'Health Services', description: 'Health permits and inspections', type: 'module', url: '{{ route("health.index") }}' },
+                    { title: 'Human Resources', description: 'Employee management and payroll', type: 'module', url: '{{ route("hr.index") }}' },
+                    { title: 'Committee Management', description: 'Meeting management and minutes', type: 'module', url: '{{ route("committee.index") }}' },
+                    { title: 'Engineering Services', description: 'Infrastructure projects and maintenance', type: 'module', url: '{{ route("engineering.index") }}' },
+                    { title: 'Licensing', description: 'Business licenses and permits', type: 'module', url: '{{ route("licensing.index") }}' },
+                    { title: 'Property Tax', description: 'Property tax management', type: 'module', url: '{{ route("property-tax.index") }}' },
+                    { title: 'CRM', description: 'Customer relationship management', type: 'module', url: '{{ route("administration.index") }}' },
+                    
+                    // Quick Actions
+                    { title: 'Create Invoice', description: 'Generate a new invoice', type: 'action', url: '{{ route("finance.create-invoice") }}' },
+                    { title: 'View Reports', description: 'Access system reports', type: 'action', url: '{{ route("reports.index") }}' },
+                    { title: 'User Management', description: 'Manage system users', type: 'action', url: '{{ route("council-admin.users.index") }}' },
+                    { title: 'Module Management', description: 'Configure system modules', type: 'action', url: '{{ route("council-admin.modules.index") }}' },
+                    
+                    // Common Tasks
+                    { title: 'Add Customer', description: 'Register a new customer', type: 'task', url: '#' },
+                    { title: 'Process Payment', description: 'Record a payment', type: 'task', url: '#' },
+                    { title: 'Schedule Inspection', description: 'Book an inspection', type: 'task', url: '#' },
+                    { title: 'Generate Report', description: 'Create a custom report', type: 'task', url: '#' }
+                ];
+
+                searchInput.addEventListener('input', function() {
+                    clearTimeout(searchTimeout);
+                    const query = this.value.trim();
+
+                    if (query.length < 2) {
+                        searchResults.classList.remove('show');
+                        return;
+                    }
+
+                    searchTimeout = setTimeout(() => {
+                        performSearch(query);
+                    }, 300);
+                });
+
+                searchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const query = searchInput.value.trim();
+                    if (query.length >= 2) {
+                        performSearch(query, true);
+                    }
+                });
+
+                function performSearch(query, forceOpen = false) {
+                    const results = searchData.filter(item => 
+                        item.title.toLowerCase().includes(query.toLowerCase()) ||
+                        item.description.toLowerCase().includes(query.toLowerCase())
+                    );
+
+                    displaySearchResults(results, query, forceOpen);
+                }
+
+                function displaySearchResults(results, query, forceOpen = false) {
+                    const content = searchResults.querySelector('.search-content');
+                    
+                    if (results.length === 0) {
+                        content.innerHTML = `
+                            <div class="search-no-results">
+                                No results found for "${query}"
+                            </div>
+                        `;
+                    } else {
+                        const groupedResults = groupResultsByType(results);
+                        let html = '';
+
+                        Object.keys(groupedResults).forEach(type => {
+                            html += `<div class="search-category">${type.charAt(0).toUpperCase() + type.slice(1)}s</div>`;
+                            groupedResults[type].forEach(result => {
+                                html += `
+                                    <div class="search-item" onclick="navigateToResult('${result.url}')">
+                                        <div class="search-item-title">${highlightQuery(result.title, query)}</div>
+                                        <div class="search-item-description">${highlightQuery(result.description, query)}</div>
+                                        <div class="search-item-type">${result.type}</div>
+                                    </div>
+                                `;
+                            });
+                        });
+
+                        content.innerHTML = html;
+                    }
+
+                    searchResults.classList.add('show');
+
+                    if (forceOpen && results.length > 0) {
+                        // Navigate to first result if Enter was pressed
+                        window.location.href = results[0].url;
+                    }
+                }
+
+                function groupResultsByType(results) {
+                    return results.reduce((groups, result) => {
+                        const type = result.type;
+                        if (!groups[type]) {
+                            groups[type] = [];
+                        }
+                        groups[type].push(result);
+                        return groups;
+                    }, {});
+                }
+
+                function highlightQuery(text, query) {
+                    const regex = new RegExp(`(${query})`, 'gi');
+                    return text.replace(regex, '<strong>$1</strong>');
+                }
+
+                // Close search results when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!searchForm.contains(e.target)) {
+                        searchResults.classList.remove('show');
+                    }
+                });
+
+                // Keyboard shortcuts
+                document.addEventListener('keydown', function(e) {
+                    // Ctrl/Cmd + K to focus search
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                        e.preventDefault();
+                        searchInput.focus();
+                    }
+                    
+                    // Escape to close search results
+                    if (e.key === 'Escape') {
+                        searchResults.classList.remove('show');
+                        searchInput.blur();
+                    }
+                });
+            }
+
+            function navigateToResult(url) {
+                if (url && url !== '#') {
+                    window.location.href = url;
+                }
+            }
         });
     </script>
 
