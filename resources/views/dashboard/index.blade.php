@@ -167,7 +167,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3 mb-3">
-                            <a href="{{ route('crm.customers.create') }}" class="btn btn-outline-primary btn-block">
+                            <a href="{{ route('administration.crm.customers.create') }}" class="btn btn-outline-primary btn-block">
                                 <i class="fas fa-user-plus"></i> Add Customer
                             </a>
                         </div>
