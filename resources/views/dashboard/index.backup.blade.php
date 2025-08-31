@@ -39,7 +39,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Total Users</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" data-stat="total_users">{{ number_format($stats['total_users'] ?? 0) }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ number_format($stats['total_users'] ?? 0) }}</div>
                             <div class="text-xs text-muted mt-1">
                                 <i class="fas fa-user-plus text-success"></i> +{{ $stats['today_new_users'] ?? 0 }} today
                             </div>
@@ -59,13 +59,13 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Active Modules</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" data-stat="active_modules">{{ $stats['active_modules'] ?? 0 }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['active_modules'] ?? 0 }}</div>
                             <div class="text-xs text-muted mt-1">
                                 {{ count($availableModules ?? []) }} available to you
                             </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-cube fa-2x text-gray-300"></i>
+                            <i class="fas fa-cubes fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Revenue Today</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" data-stat="today_revenue">${{ number_format($stats['today_revenue'] ?? 0, 2) }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">${{ number_format($stats['today_revenue'] ?? 0, 2) }}</div>
                             <div class="text-xs text-muted mt-1">
                                 Total: ${{ number_format($stats['total_revenue'] ?? 0, 2) }}
                             </div>
@@ -99,7 +99,7 @@
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Tasks</div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" data-stat="pending_requests">{{ $stats['pending_requests'] ?? 0 }}</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $stats['pending_requests'] ?? 0 }}</div>
                                 </div>
                                 <div class="col">
                                     <div class="progress progress-sm mr-2">
@@ -230,238 +230,237 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Total Customers</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ number_format($stats['total_customers'] ?? 0) }}</div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Departments</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ number_format($stats['total_departments'] ?? 0) }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Stats Row -->
+    <div class="row mb-4">
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <p class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Total Customers</p>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['total_customers'] ?? 0 }}</div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Service Requests</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ number_format($stats['service_requests'] ?? 0) }}</div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Active Citizens</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ number_format($stats['active_citizens'] ?? 0) }}</div>
+                        <div class="col-auto">
+                            <i class="fas fa-user-friends fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Recent Activity -->
-        <div class="col-lg-6 mb-4">
-            <div class="card shadow">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Recent Activity</h6>
-                </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card border-0 shadow-sm h-100">
                 <div class="card-body">
-                    @if($recentRequests && $recentRequests->count() > 0)
-                        <div class="table-responsive">
-                            <table class="table table-borderless" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Request</th>
-                                        <th>Customer</th>
-                                        <th>Status</th>
-                                        <th>Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($recentRequests as $request)
-                                    <tr>
-                                        <td>
-                                            <div class="font-weight-bold">{{ $request->title ?? 'Request #' . $request->id }}</div>
-                                        </td>
-                                        <td>{{ $request->customer->name ?? 'Unknown' }}</td>
-                                        <td>
-                                            <span class="badge badge-{{ $request->status === 'completed' ? 'success' : ($request->status === 'pending' ? 'warning' : 'info') }}">
-                                                {{ ucfirst($request->status ?? 'pending') }}
-                                            </span>
-                                        </td>
-                                        <td><small>{{ $request->created_at ? \Carbon\Carbon::parse($request->created_at)->diffForHumans() : 'Unknown' }}</small></td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <p class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Departments</p>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['total_departments'] ?? 0 }}</div>
                         </div>
-                    @else
-                        <div class="text-center py-4">
-                            <i class="fas fa-clipboard-list fa-3x text-gray-300 mb-3"></i>
-                            <h6 class="text-gray-600">No recent activity</h6>
-                            <p class="text-gray-500 small">Recent service requests will appear here.</p>
+                        <div class="col-auto">
+                            <i class="fas fa-building fa-2x text-gray-300"></i>
                         </div>
-                    @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <p class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Completed Requests</p>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['completed_requests'] ?? 0 }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <p class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Today's Revenue</p>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">${{ number_format($stats['today_revenue'] ?? 0, 2) }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-chart-line fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Quick Actions -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white">
+                    <h6 class="m-0 font-weight-bold text-primary">Quick Actions</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ route('administration.crm.customers.create') }}" class="btn btn-outline-primary btn-block">
+                                <i class="fas fa-user-plus"></i> Add Customer
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ route('service-requests.create') }}" class="btn btn-outline-success btn-block">
+                                <i class="fas fa-plus-circle"></i> New Service Request
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ route('finance.pos.index') }}" class="btn btn-outline-info btn-block">
+                                <i class="fas fa-cash-register"></i> POS Terminal
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ route('reports.index') }}" class="btn btn-outline-warning btn-block">
+                                <i class="fas fa-chart-bar"></i> View Reports
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modules Grid -->
+    @if($availableModules && $availableModules->isNotEmpty())
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white">
+                    <h6 class="m-0 font-weight-bold text-primary">Available Modules</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @foreach($availableModules as $module)
+                        <div class="col-lg-4 col-md-6 mb-3">
+                            <div class="card border-left-primary h-100">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                {{ $module->display_name ?? $module->name ?? 'Module' }}
+                                            </div>
+                                            <div class="text-gray-800 small mb-2">
+                                                {{ $module->description ?? 'No description available' }}
+                                            </div>
+                                            @if(isset($module->is_active) && $module->is_active)
+                                                <a href="{{ route($module->route ?? '#') }}" class="btn btn-primary btn-sm">
+                                                    <i class="fas fa-{{ $module->icon ?? 'cube' }}"></i> Access Module
+                                                </a>
+                                            @else
+                                                <span class="badge badge-secondary">Inactive</span>
+                                            @endif
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-{{ $module->icon ?? 'cube' }} fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <!-- Recent Activity -->
+    @if(isset($recentRequests) && $recentRequests->isNotEmpty())
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white">
+                    <h6 class="m-0 font-weight-bold text-primary">Recent Service Requests</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Customer</th>
+                                    <th>Status</th>
+                                    <th>Created</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($recentRequests as $request)
+                                <tr>
+                                    <td>{{ $request->id }}</td>
+                                    <td>{{ $request->title ?? 'Service Request #' . $request->id }}</td>
+                                    <td>{{ $request->customer->name ?? 'Unknown Customer' }}</td>
+                                    <td>
+                                        <span class="badge badge-{{ $request->status === 'completed' ? 'success' : ($request->status === 'pending' ? 'warning' : 'info') }}">
+                                            {{ ucfirst($request->status ?? 'pending') }}
+                                        </span>
+                                    </td>
+                                    <td>{{ $request->created_at ? \Carbon\Carbon::parse($request->created_at)->diffForHumans() : 'Unknown' }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    @if(!isset($recentRequests) || $recentRequests->isEmpty())
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center py-5">
+                    <i class="fas fa-chart-line fa-3x text-gray-300 mb-3"></i>
+                    <h5 class="text-gray-600">No recent activity</h5>
+                    <p class="text-gray-500">Start using the system to see activity here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 </div>
 
 <style>
-.module-card {
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.module-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
-}
-
-.progress-sm {
-    height: 0.375rem;
-}
-
-.chart-area {
-    position: relative;
-    height: 300px;
-    width: 100%;
-}
-
-.chart-pie {
-    position: relative;
-    height: 250px;
-    width: 100%;
+.bg-gradient-primary {
+    background: linear-gradient(45deg, #4e73df 0%, #224abe 100%);
 }
 
 .border-left-primary {
     border-left: 0.25rem solid #4e73df !important;
 }
 
-.border-left-success {
-    border-left: 0.25rem solid #1cc88a !important;
-}
-
-.border-left-info {
-    border-left: 0.25rem solid #36b9cc !important;
-}
-
-.border-left-warning {
-    border-left: 0.25rem solid #f6c23e !important;
-}
-
 .text-xs {
     font-size: 0.75rem;
 }
 
-.bg-gradient-primary {
-    background: linear-gradient(45deg, #4e73df 0%, #224abe 100%);
+.card {
+    border-radius: 0.35rem;
+}
+
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem 0 rgba(58, 59, 69, 0.2) !important;
 }
 </style>
-
-@endsection
-
-@section('scripts')
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Revenue Chart
-    const revenueCtx = document.getElementById('revenueChart');
-    if (revenueCtx) {
-        new Chart(revenueCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                    label: 'Revenue ($)',
-                    data: [
-                        {{ $stats['total_revenue'] ?? 0 }},
-                        {{ ($stats['total_revenue'] ?? 0) * 0.8 }},
-                        {{ ($stats['total_revenue'] ?? 0) * 1.2 }},
-                        {{ ($stats['total_revenue'] ?? 0) * 0.9 }},
-                        {{ ($stats['total_revenue'] ?? 0) * 1.1 }},
-                        {{ ($stats['total_revenue'] ?? 0) * 0.95 }},
-                        {{ ($stats['total_revenue'] ?? 0) * 1.15 }},
-                        {{ ($stats['total_revenue'] ?? 0) * 1.05 }},
-                        {{ ($stats['total_revenue'] ?? 0) * 0.85 }},
-                        {{ ($stats['total_revenue'] ?? 0) * 1.25 }},
-                        {{ ($stats['total_revenue'] ?? 0) * 1.0 }},
-                        {{ $stats['today_revenue'] ?? 0 }}
-                    ],
-                    borderColor: '#4e73df',
-                    backgroundColor: 'rgba(78, 115, 223, 0.1)',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return '$' + value.toLocaleString();
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    }
-
-    // Service Requests Pie Chart
-    const serviceCtx = document.getElementById('serviceRequestsChart');
-    if (serviceCtx) {
-        new Chart(serviceCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Completed', 'In Progress', 'Pending'],
-                datasets: [{
-                    data: [
-                        {{ $stats['completed_requests'] ?? 0 }},
-                        {{ ($stats['service_requests'] ?? 0) - ($stats['pending_requests'] ?? 0) - ($stats['completed_requests'] ?? 0) }},
-                        {{ $stats['pending_requests'] ?? 0 }}
-                    ],
-                    backgroundColor: ['#1cc88a', '#36b9cc', '#f6c23e'],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }
-        });
-    }
-
-    // Auto-refresh dashboard data every 30 seconds
-    setInterval(function() {
-        fetch('{{ route("dashboard.stats") }}')
-            .then(response => response.json())
-            .then(data => {
-                // Update stats if elements exist
-                const elements = {
-                    'total_users': document.querySelector('[data-stat="total_users"]'),
-                    'active_modules': document.querySelector('[data-stat="active_modules"]'),
-                    'pending_requests': document.querySelector('[data-stat="pending_requests"]'),
-                    'today_revenue': document.querySelector('[data-stat="today_revenue"]')
-                };
-
-                Object.keys(elements).forEach(key => {
-                    if (elements[key] && data[key] !== undefined) {
-                        elements[key].textContent = key.includes('revenue') ? 
-                            '$' + parseFloat(data[key]).toLocaleString() : 
-                            parseInt(data[key]).toLocaleString();
-                    }
-                });
-            })
-            .catch(error => console.log('Stats refresh failed:', error));
-    }, 30000);
-});
-</script>
 @endsection
