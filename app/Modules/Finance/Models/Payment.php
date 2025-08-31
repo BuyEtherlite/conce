@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Modules\Finance\Models;
@@ -6,103 +5,76 @@ namespace App\Modules\Finance\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Customer;
-use App\Models\User;
 
 class Payment extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'finance_payments';
+    protected $table = 'pos_payments';
 
     protected $fillable = [
         'payment_number',
-        'customer_id',
-        'invoice_id',
-        'user_id',
-        'payment_date',
-        'amount',
+        'payment_date', 
+        'total_amount',
         'payment_method',
-        'reference_number',
-        'bank_account',
-        'cheque_number',
+        'terminal_id',
         'status',
-        'currency',
-        'exchange_rate',
+        'payment_details',
         'notes',
-        'processed_by'
+        'created_by'
     ];
 
     protected $casts = [
-        'payment_date' => 'date',
-        'amount' => 'decimal:2',
-        'exchange_rate' => 'decimal:4'
+        'payment_date' => 'datetime',
+        'total_amount' => 'decimal:2',
+        'payment_details' => 'array'
     ];
 
-    protected $attributes = [
-        'status' => 'completed',
-        'currency' => 'USD',
-        'exchange_rate' => 1.0000
+    const PAYMENT_METHODS = [
+        'cash' => 'Cash',
+        'card' => 'Credit/Debit Card',
+        'mobile_money' => 'Mobile Money',
+        'bank_transfer' => 'Bank Transfer',
+        'cheque' => 'Cheque'
+    ];
+
+    const STATUSES = [
+        'pending' => 'Pending',
+        'completed' => 'Completed', 
+        'failed' => 'Failed',
+        'cancelled' => 'Cancelled'
     ];
 
     /**
-     * Get the customer this payment belongs to
+     * Get the terminal that processed this payment
      */
-    public function customer()
+    public function terminal()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(PosTerminal::class, 'terminal_id');
     }
 
     /**
-     * Get the invoice this payment is for
+     * Get the user who created this payment
      */
-    public function invoice()
+    public function creator()
     {
-        return $this->belongsTo(Invoice::class);
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
     }
 
     /**
-     * Get the user who recorded this payment
+     * Get the receipt for this payment
      */
-    public function user()
+    public function receipt()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(Receipt::class);
     }
 
     /**
-     * Get the user who processed this payment
-     */
-    public function processor()
-    {
-        return $this->belongsTo(User::class, 'processed_by');
-    }
-
-    /**
-     * Generate payment number
-     */
-    public static function generatePaymentNumber()
-    {
-        $year = date('Y');
-        $lastPayment = static::whereYear('created_at', $year)->latest()->first();
-        $nextNumber = $lastPayment ? (intval(substr($lastPayment->payment_number, -6)) + 1) : 1;
-        
-        return 'PAY-' . $year . '-' . str_pad($nextNumber, 6, '0', STR_PAD_LEFT);
-    }
-
-    /**
-     * Scope for completed payments
+     * Scope for successful payments
      */
     public function scopeCompleted($query)
     {
         return $query->where('status', 'completed');
-    }
-
-    /**
-     * Scope for pending payments
-     */
-    public function scopePending($query)
-    {
-        return $query->where('status', 'pending');
     }
 
     /**
@@ -114,20 +86,51 @@ class Payment extends Model
     }
 
     /**
-     * Process payment
+     * Scope for payments in date range
      */
-    public function process()
+    public function scopeDateRange($query, $startDate, $endDate)
     {
-        $this->update([
-            'status' => 'completed',
-            'processed_by' => auth()->id()
-        ]);
+        return $query->whereBetween('payment_date', [$startDate, $endDate]);
+    }
 
-        // Update invoice payment status if fully paid
-        if ($this->invoice && $this->invoice->isPaid()) {
-            $this->invoice->markAsPaid();
-        }
+    /**
+     * Get payment method display name
+     */
+    public function getPaymentMethodNameAttribute()
+    {
+        return self::PAYMENT_METHODS[$this->payment_method] ?? $this->payment_method;
+    }
 
-        return $this;
+    /**
+     * Get status display name
+     */
+    public function getStatusNameAttribute()
+    {
+        return self::STATUSES[$this->status] ?? $this->status;
+    }
+
+    /**
+     * Check if payment is successful
+     */
+    public function isCompleted()
+    {
+        return $this->status === 'completed';
+    }
+
+    /**
+     * Check if payment can be refunded
+     */
+    public function canBeRefunded()
+    {
+        return $this->isCompleted() && $this->created_at->diffInDays(now()) <= 30;
+    }
+
+    /**
+     * Calculate loyalty points earned
+     */
+    public function calculateLoyaltyPoints()
+    {
+        // 1 point per dollar spent, minimum 1 point
+        return max(1, floor($this->total_amount));
     }
 }
