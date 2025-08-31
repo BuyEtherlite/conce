@@ -85,7 +85,12 @@ return new class extends Migration
                 $table->string('customer_type')->index();
                 $table->timestamps();
                 
-                $table->fullText('search_terms');
+                // SQLite doesn't support fulltext, use regular index instead
+                if (config('database.default') !== 'sqlite') {
+                    $table->fullText('search_terms');
+                } else {
+                    $table->index('search_terms');
+                }
                 $table->unique('customer_id');
             });
         }

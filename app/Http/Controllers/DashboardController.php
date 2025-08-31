@@ -122,9 +122,15 @@ class DashboardController extends Controller
 
             $query = DB::table($table);
             
-            foreach ($conditions as $column => $value) {
-                if (DB::getSchemaBuilder()->hasColumn($table, $column)) {
-                    $query->where($column, $value);
+            // Handle closure-based conditions
+            if (is_callable($conditions)) {
+                $conditions($query);
+            } else {
+                // Handle array-based conditions
+                foreach ($conditions as $column => $value) {
+                    if (DB::getSchemaBuilder()->hasColumn($table, $column)) {
+                        $query->where($column, $value);
+                    }
                 }
             }
 
@@ -484,14 +490,73 @@ class DashboardController extends Controller
 
     public function getStats()
     {
-        $stats = [
-            'users' => $this->safeCount('users'),
-            'customers' => $this->safeCount('customers'),
-            'service_requests' => $this->safeCount('service_requests'),
-            'pending_requests' => $this->safeCount('service_requests', ['status' => 'pending']),
-            'active_modules' => $this->safeCount('core_modules', ['is_active' => true]),
-        ];
+        try {
+            $stats = [
+                'total_users' => $this->safeCount('users'),
+                'active_modules' => $this->safeCount('core_modules', ['is_active' => true]),
+                'pending_requests' => $this->safeCount('service_requests', ['status' => 'pending']),
+                'completed_requests' => $this->safeCount('service_requests', ['status' => 'completed']),
+                'total_customers' => $this->safeCount('customers'),
+                'total_departments' => $this->safeCount('departments'),
+                'total_offices' => $this->safeCount('offices'),
+                'service_requests' => $this->safeCount('service_requests'),
+                'active_citizens' => $this->safeCount('users', ['role' => 'citizen', 'active' => true]),
+            ];
 
-        return response()->json($stats);
+            // Get revenue data with fallback
+            $totalRevenue = 0;
+            $todayRevenue = 0;
+
+            try {
+                if (DB::getSchemaBuilder()->hasTable('revenue_collections')) {
+                    $totalRevenue = DB::table('revenue_collections')->sum('amount') ?? 0;
+                    $todayRevenue = DB::table('revenue_collections')
+                        ->whereDate('created_at', today())
+                        ->sum('amount') ?? 0;
+                } elseif (DB::getSchemaBuilder()->hasTable('fiscal_receipts')) {
+                    $totalRevenue = DB::table('fiscal_receipts')
+                        ->where('status', 'completed')
+                        ->sum('total_amount') ?? 0;
+                    $todayRevenue = DB::table('fiscal_receipts')
+                        ->where('status', 'completed')
+                        ->whereDate('created_at', today())
+                        ->sum('total_amount') ?? 0;
+                } elseif (DB::getSchemaBuilder()->hasTable('finance_payments')) {
+                    $totalRevenue = DB::table('finance_payments')
+                        ->where('status', 'completed')
+                        ->sum('amount') ?? 0;
+                    $todayRevenue = DB::table('finance_payments')
+                        ->where('status', 'completed')
+                        ->whereDate('created_at', today())
+                        ->sum('amount') ?? 0;
+                }
+            } catch (\Exception $e) {
+                Log::warning("Could not fetch revenue data for stats API: " . $e->getMessage());
+            }
+
+            $stats['total_revenue'] = $totalRevenue;
+            $stats['today_revenue'] = $todayRevenue;
+            $stats['today_new_users'] = $this->safeCount('users', function($query) {
+                return $query->whereDate('created_at', today());
+            });
+
+            return response()->json($stats);
+        } catch (\Exception $e) {
+            Log::error("Error fetching dashboard stats API: " . $e->getMessage());
+            return response()->json([
+                'total_users' => 0,
+                'active_modules' => 0,
+                'pending_requests' => 0,
+                'completed_requests' => 0,
+                'total_customers' => 0,
+                'total_departments' => 0,
+                'total_offices' => 0,
+                'total_revenue' => 0,
+                'today_revenue' => 0,
+                'service_requests' => 0,
+                'active_citizens' => 0,
+                'today_new_users' => 0,
+            ]);
+        }
     }
 }

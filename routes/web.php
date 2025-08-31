@@ -173,6 +173,7 @@ Route::get('/', [DashboardController::class, 'index'])->name('home');
 
 // Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard/stats', [DashboardController::class, 'getStats'])->name('dashboard.stats');
 
 // Protected routes
 Route::middleware(['auth'])->group(function () {
