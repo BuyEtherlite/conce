@@ -22,7 +22,7 @@ class CostCenterController extends Controller
             'total_budget_allocated' => CostCenter::sum('budget_allocated')
         ];
 
-        return view('finance/costcenter.index', compact('costCenters', 'summary'));
+        return view('finance.cost-centers.index', compact('costCenters', 'summary'));
     }
 
     public function create()
@@ -45,7 +45,7 @@ class CostCenterController extends Controller
             'location' => 'Location'
         ];
 
-        return view('finance/costcenter.create', compact('parentCenters', 'managers', 'departments', 'types'));
+        return view('finance.cost-centers.create', compact('parentCenters', 'managers', 'departments', 'types'));
     }
 
     public function store(Request $request)
@@ -92,7 +92,7 @@ class CostCenterController extends Controller
             'total_spent' => $costCenter->budgets()->sum('actual_amount')
         ];
 
-        return view('finance/costcenter.show', compact('costCenter', 'budgetSummary'));
+        return view('finance.cost-centers.show', compact('costCenter', 'budgetSummary'));
     }
 
     public function edit($id)
@@ -118,7 +118,7 @@ class CostCenterController extends Controller
             'location' => 'Location'
         ];
 
-        return view('finance/costcenter.edit', compact('costCenter', 'parentCenters', 'managers', 'departments', 'types'));
+        return view('finance.cost-centers.edit', compact('costCenter', 'parentCenters', 'managers', 'departments', 'types'));
     }
 
     public function update(Request $request, $id)

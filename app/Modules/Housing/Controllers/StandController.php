@@ -21,7 +21,7 @@ class StandController extends Controller
             'reserved_stands' => HousingStand::where('status', 'reserved')->count()
         ];
 
-        return view('housing/stand.index', compact('stands', 'summary'));
+        return view('housing.stands.index', compact('stands', 'summary'));
     }
 
     public function create()
@@ -35,7 +35,7 @@ class StandController extends Controller
             'under_development' => 'Under Development'
         ];
 
-        return view('housing/stand.create', compact('standAreas', 'statuses'));
+        return view('housing.stands.create', compact('standAreas', 'statuses'));
     }
 
     public function store(Request $request)
@@ -82,7 +82,7 @@ class StandController extends Controller
         $stand = HousingStand::with(['standArea', 'allocations.applicant', 'currentAllocation'])
                              ->findOrFail($id);
 
-        return view('housing/stand.show', compact('stand'));
+        return view('housing.stands.show', compact('stand'));
     }
 
     public function edit($id)
@@ -97,7 +97,7 @@ class StandController extends Controller
             'under_development' => 'Under Development'
         ];
 
-        return view('housing/stand.edit', compact('stand', 'standAreas', 'statuses'));
+        return view('housing.stands.edit', compact('stand', 'standAreas', 'statuses'));
     }
 
     public function update(Request $request, $id)

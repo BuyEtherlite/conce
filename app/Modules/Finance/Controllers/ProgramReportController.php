@@ -17,7 +17,7 @@ class ProgramReportController extends Controller
                                ->latest()
                                ->paginate(20);
 
-        return view('finance/programreport.index', compact('reports'));
+        return view('finance.program-reports.index', compact('reports'));
     }
 
     public function create()
@@ -33,7 +33,7 @@ class ProgramReportController extends Controller
                          ->whereNotNull('budget_name')
                          ->pluck('budget_name', 'budget_name');
 
-        return view('finance/programreport.create', compact('reportTypes', 'programs'));
+        return view('finance.program-reports.create', compact('reportTypes', 'programs'));
     }
 
     public function store(Request $request)
@@ -87,7 +87,7 @@ class ProgramReportController extends Controller
         $report = ProgramReport::with('generatedBy')->findOrFail($id);
         $summary = $report->generateSummary();
 
-        return view('finance/programreport.show', compact('report', 'summary'));
+        return view('finance.program-reports.show', compact('report', 'summary'));
     }
 
     public function edit($id)
@@ -105,7 +105,7 @@ class ProgramReportController extends Controller
                          ->whereNotNull('budget_name')
                          ->pluck('budget_name', 'budget_name');
 
-        return view('finance/programreport.edit', compact('report', 'reportTypes', 'programs'));
+        return view('finance.program-reports.edit', compact('report', 'reportTypes', 'programs'));
     }
 
     public function update(Request $request, $id)

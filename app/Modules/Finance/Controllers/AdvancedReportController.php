@@ -30,7 +30,7 @@ class AdvancedReportController extends Controller
             'accounts_payable' => 'Accounts Payable Report'
         ];
 
-        return view('finance/advancedreport.index', compact('reports', 'reportTypes'));
+        return view('finance.reports.index', compact('reports', 'reportTypes'));
     }
 
     public function create()
@@ -49,7 +49,7 @@ class AdvancedReportController extends Controller
 
         $accounts = ChartOfAccount::where('is_active', true)->get();
 
-        return view('finance/advancedreport.create', compact('reportTypes', 'accounts'));
+        return view('finance.reports.create', compact('reportTypes', 'accounts'));
     }
 
     public function store(Request $request)
@@ -87,7 +87,7 @@ class AdvancedReportController extends Controller
         $report = FinancialReport::with('generatedBy')->findOrFail($id);
         $summary = $report->generateSummary();
 
-        return view('finance/advancedreport.show', compact('report', 'summary'));
+        return view('finance.reports.show', compact('report', 'summary'));
     }
 
     public function edit($id)
@@ -108,7 +108,7 @@ class AdvancedReportController extends Controller
 
         $accounts = ChartOfAccount::where('is_active', true)->get();
 
-        return view('finance/advancedreport.edit', compact('report', 'reportTypes', 'accounts'));
+        return view('finance.reports.edit', compact('report', 'reportTypes', 'accounts'));
     }
 
     public function update(Request $request, $id)

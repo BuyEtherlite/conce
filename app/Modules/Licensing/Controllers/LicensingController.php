@@ -23,7 +23,7 @@ class LicensingController extends Controller
             'expiring_soon' => BusinessLicense::expiringSoon()->count()
         ];
 
-        return view('licensing/licensing.index', compact('licenses', 'summary'));
+        return view('licensing.index', compact('licenses', 'summary'));
     }
 
     public function create()
@@ -39,7 +39,7 @@ class LicensingController extends Controller
             'other' => 'Other'
         ];
 
-        return view('licensing/licensing.create', compact('licenseTypes', 'businessTypes'));
+        return view('licensing.create', compact('licenseTypes', 'businessTypes'));
     }
 
     public function store(Request $request)
@@ -88,7 +88,7 @@ class LicensingController extends Controller
         $license = BusinessLicense::with(['licenseType', 'processedBy', 'approvedBy', 'applications'])
                                  ->findOrFail($id);
 
-        return view('licensing/licensing.show', compact('license'));
+        return view('licensing.show', compact('license'));
     }
 
     public function edit($id)
@@ -105,7 +105,7 @@ class LicensingController extends Controller
             'other' => 'Other'
         ];
 
-        return view('licensing/licensing.edit', compact('license', 'licenseTypes', 'businessTypes'));
+        return view('licensing.edit', compact('license', 'licenseTypes', 'businessTypes'));
     }
 
     public function update(Request $request, $id)

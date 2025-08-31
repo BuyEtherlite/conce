@@ -22,7 +22,7 @@ class AllocationController extends Controller
             'completed_allocations' => StandAllocation::where('status', 'completed')->count()
         ];
 
-        return view('housing/allocation.index', compact('allocations', 'summary'));
+        return view('housing.allocations.index', compact('allocations', 'summary'));
     }
 
     public function create()
@@ -53,7 +53,7 @@ class AllocationController extends Controller
             'lease' => 'Lease'
         ];
 
-        return view('housing/allocation.create', compact('availableStands', 'intendedUses', 'businessTypes', 'paymentPlans'));
+        return view('housing.allocations.create', compact('availableStands', 'intendedUses', 'businessTypes', 'paymentPlans'));
     }
 
     public function store(Request $request)
@@ -118,7 +118,7 @@ class AllocationController extends Controller
         $allocation = StandAllocation::with(['stand.standArea'])
                                     ->findOrFail($id);
 
-        return view('housing/allocation.show', compact('allocation'));
+        return view('housing.allocations.show', compact('allocation'));
     }
 
     public function edit($id)
@@ -154,7 +154,7 @@ class AllocationController extends Controller
             'lease' => 'Lease'
         ];
 
-        return view('housing/allocation.edit', compact('allocation', 'availableStands', 'intendedUses', 'businessTypes', 'paymentPlans'));
+        return view('housing.allocations.edit', compact('allocation', 'availableStands', 'intendedUses', 'businessTypes', 'paymentPlans'));
     }
 
     public function update(Request $request, $id)
