@@ -816,7 +816,7 @@ Route::middleware(['auth'])->prefix('health')->name('health.')->group(function (
     Route::get('/', [HealthController::class, 'index'])->name('index');
     Route::get('/emergency', [HealthController::class, 'emergency'])->name('emergency');
     Route::get('/environmental', [HealthController::class, 'environmental'])->name('environmental');
-    Route::get('/facilities', [HealthController::class, 'facilities'])->name('facilities');
+    Route::get('/facilities', [HealthController::class, 'facilities'])->name('facilities.index');
     Route::get('/food-safety', [HealthController::class, 'foodSafety'])->name('food-safety');
     Route::get('/immunization', [HealthController::class, 'immunization'])->name('immunization');
     Route::get('/quality', [HealthController::class, 'quality'])->name('quality');
