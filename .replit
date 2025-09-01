@@ -1,0 +1,2 @@
+run = "php artisan serve --host=0.0.0.0 --port=5000"
+modules = ["php-8.2", "postgresql-16"]
